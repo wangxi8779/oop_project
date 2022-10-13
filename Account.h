@@ -1,5 +1,5 @@
-#ifndef ACCOUNT_H;
-#define ACCOUNT_H ;
+#ifndef ACCOUNT_H
+#define ACCOUNT_H
 #include <string>
 
 class Account {
@@ -11,8 +11,9 @@ class Account {
   std::string email;
 
  public:
+  Account();
   Account(std::string password, std::string name, std::string phone,
           std::string email);
-//   static bool login(std::string email, std::string password);
+  bool login(std::string email, std::string password);
 };
 #endif
