@@ -1,0 +1,13 @@
+install sfml from https://www.sfml-dev.org/download/sfml/2.5.1/ and extract to know file directory
+
+run commands:
+g++ -c mainSFML.cpp Button.h Button.cpp DisplayText.h DisplayText.cpp -I <sfml-install-path>/include
+
+g++ mainSFML.o Button.o DisplayText.o -o sfml-app -L<sfml-install-path>/lib -lsfml-graphics -lsfml-window -lsfml-system
+export LD_LIBRARY_PATH=<sfml-install-path>/lib && ./sfml-app
+
+then run with ./sfml-app
+if there are errors, use following command:
+export LD_LIBRARY_PATH=<sfml-install-path>/lib && ./sfml-app
+
+I will create a makefile soon which will do this automically, and i will set up the sfml-install-path to be within our project files so anyone who pulls can compile without any errors.
