@@ -1,24 +1,19 @@
 #ifndef MEMBER_H;
-#define MEMBER_H;
+#define MEMBER_H ;
 #include <string>
 #include <vector>
+
+#include "Account.h"
 #include "Watchlist.h"
 
-class Member {
-    private:
-    std::vector<Watchlist> watchlist;
-    std::string watchlistName;
+class Member : public Account {
+ private:
+  std::vector<Watchlist> watchlists;
 
-    public:
-    Member();
-    Member();// parameter
-    void removeWatchlist(Member watchlistName);
-    bool createWatchlis(Member watchlistName);
-    Watchlist getWatchlists();
-
-
-
+ public:
+  void removeWatchlist(std::string);
+  bool createWatchlis(std::string);
+  std::vector<Watchlist> getWatchlists();
 };
 
-
-#endif 
+#endif
