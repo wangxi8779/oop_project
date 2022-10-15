@@ -14,7 +14,7 @@ class Trader : public Member {
 
  public:
   Trader(std::string password, std::string name, std::string phone,
-          std::string email, std::string status):Account(password, name, phone, email, status){};
+          std::string email, std::string status):Member(password, name, phone, email, status){};
   double deposit(double);
   double withdraw(double);
   StockPortfolio* buy(Stock* stock, int quantity, double price,
