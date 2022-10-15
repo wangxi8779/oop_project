@@ -12,7 +12,9 @@ using namespace std;
 
 int main() {
   vector<Stock> stocks;
-  // TODO: add stocks
+  Stock s1 = Stock("Tesla", 100.5);
+  Stock s2 = Stock("Apple", 90);
+  Stock s3 = Stock("Google", 1000.3);
   StockMarket stockMarket = StockMarket(stocks);
 
   // Login
@@ -25,14 +27,9 @@ int main() {
     cout << "please input password" << endl;
     cin >> password;
     currentUser = stockMarket.login(email, password);
-    if (currentUser) {
-      cout << currentUser->getName() << endl;
-      cout << currentUser->getType() << endl;
-      cout << "login successfully" << endl;
-    } else {
-      cout << "email or password is incorrect, please input again" << endl;
-    }
   }
+
+  // Login as admin
   if(currentUser->getType() == "admin") {
     while(true) {
       int action = 0;
@@ -73,5 +70,19 @@ int main() {
       }
       stockMarket.updateAccounts();
     }
+  }
+
+  // Login as member
+  else if(currentUser->getType() == "member") {
+    currentUser->addStock(&s1);
+    currentUser->addStock(&s2);
+    currentUser->displayWatchlist();
+  }
+
+  // Login as trader
+  else if(currentUser->getType() == "trader") {
+    currentUser->addStock(&s2);
+    currentUser->addStock(&s3);
+    currentUser->displayWatchlist();
   }
 }

@@ -15,6 +15,18 @@ Account::Account(string password, string name, string phone, string email, strin
 }
 
 bool Account::login(string email, string password){
+  if (status == "active") {
+    if ((this->password == password) && (this->email == email)) {
+      cout << "login successfully" << endl;
+      return true;
+    } else {
+      cout << "email or password is incorrect, please input again" << endl;
+      return false;
+    }
+  } else {
+    cout << "your account is blocked, please contact admin" << endl;
+    return false;
+  }
   return (status == "active") && (this->password == password) && (this->email == email);
 }
 
@@ -34,7 +46,12 @@ string Account::getName() {
   return name;
 }
 
+string Account::getEmail() {
+  return email;
+}
+
 string Account::toRow() {
   string result = name + "," + email + "," + password + "," + phone + "," + status + "," + type + "\n";
   return result;
 }
+

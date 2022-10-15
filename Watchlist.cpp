@@ -1,11 +1,19 @@
 #include "Watchlist.h"
 
-bool Watchlist::addStock(Watchlist *Stock) {
-    return true;
+Watchlist::Watchlist(std::string name) {
+  this->name = name;
 }
-bool Watchlist::removeStock(Watchlist *Stock) {
-    return true;
-}
-void Watchlist::displayWatchlist(std::string watchlistName) {
 
+void Watchlist::addStock(Stock* stock) {
+  stocks.push_back(stock);
+}
+void Watchlist::removeStock(Stock* stock) {
+  for(int i = 0; i < stocks.size(); i++) {
+    if (stocks.at(i) == stock) {
+      stocks.erase(stocks.begin() + i);
+    }
+  }
+}
+std::vector<Stock *> Watchlist::getStocks() {
+  return stocks;
 }

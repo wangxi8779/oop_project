@@ -21,13 +21,13 @@ void StockMarket::loadAccounts() {
     getline(accountsFile, status, ',');
     getline(accountsFile, type, '\n');
     if (type == "admin") {
-      accounts.push_back(Admin(password, name, phone, email, status, "admin", this));
+      accounts.push_back(new Admin(password, name, phone, email, status, "admin", this));
     }
     else if (type == "trader") {
-      accounts.push_back(Trader(password, name, phone, email, status, "trader"));
+      accounts.push_back(new Trader(password, name, phone, email, status, "trader"));
     }
     else {
-      accounts.push_back(Member(password, name, phone, email, status, "member"));
+      accounts.push_back(new Member(password, name, phone, email, status, "member"));
     }
   }
 }
@@ -35,16 +35,19 @@ void StockMarket::loadAccounts() {
 void StockMarket::updateAccounts(){
   std::ofstream accountsFile;
   accountsFile.open("accounts.csv");
-  for(Account account : accounts) {
-    accountsFile << account.toRow();
+  for(Account* account : accounts) {
+    accountsFile << account->toRow();
   }
   accountsFile.close();
 }
 
 Account* StockMarket::login(std::string email, std::string password) {
   for (int i = 0; i < accounts.size(); i++) {
-    if (accounts.at(i).login(email, password)) {
-      return &accounts.at(i);
+    Account* account = accounts.at(i);
+    if (account->getEmail() == email) {
+      if (account->login(email, password)) {
+        return accounts.at(i);
+      }
     }
   }
   return NULL;
@@ -52,8 +55,8 @@ Account* StockMarket::login(std::string email, std::string password) {
 
 Account* StockMarket::findAccount(std::string name) {
   for (int i = 0; i < accounts.size(); i++) {
-    if (accounts.at(i).getName() == name) {
-      return &accounts.at(i);
+    if (accounts.at(i)->getName() == name) {
+      return accounts.at(i);
     }
   }
   return NULL;

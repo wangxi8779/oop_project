@@ -21,5 +21,6 @@ class Trader : public Member {
                      std::string orderType);
   StockPortfolio* sell(Stock* stock, int quantity, double price,
                       std::string orderType);
+  void displayWatchlist();
 };
 #endif

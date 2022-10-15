@@ -1,6 +1,7 @@
 #ifndef ACCOUNT_H
 #define ACCOUNT_H
 #include <string>
+#include "Stock.h"
 
 class Account {
  protected:
@@ -20,6 +21,10 @@ class Account {
   void setType(std::string);
   std::string getType();
   std::string getName();
+  std::string getEmail();
   std::string toRow();
+  virtual void displayWatchlist(){};
+  virtual void addStock(Stock*){};
+  virtual void removeStock(Stock*){};
 };
 #endif

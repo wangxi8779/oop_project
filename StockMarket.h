@@ -7,7 +7,7 @@
 
 class StockMarket {
  private:
-  std::vector<Account> accounts;
+  std::vector<Account*> accounts;
   std::vector<Stock> stocks;
   void loadAccounts();
 

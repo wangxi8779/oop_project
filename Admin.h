@@ -15,6 +15,9 @@ class Admin : public Account {
   void unblock(Account*);
   void upgrade(Account*);
   void downgrade(Account*);
+  void displayWatchlist();
+  void addStock(Stock*);
+  void removeStock(Stock*);
 };
 
 #endif

@@ -1,11 +1,30 @@
 #include "Member.h"
 
-void Member::removeWatchlist(std::string) {
-
+Member::Member(std::string password, std::string name, std::string phone, std::string email, std::string status, std::string type) {
+  this->password = password;
+  this->name = name;
+  this->phone = phone;
+  this->email = email;
+  this->status = status;
+  this->type = type;
+  watchlist = Watchlist(name + "'s watchlist");
 }
-bool Member::createWatchlis(std::string) {
 
+Watchlist Member::getWatchlist() {
+  return watchlist;
 }
-std::vector<Watchlist> Member::getWatchlists() {
-  return watchlists;
+
+void Member::addStock(Stock* stock) {
+  watchlist.addStock(stock);
+}
+
+void Member::removeStock(Stock* stock) {
+  watchlist.removeStock(stock);
+}
+
+void Member::displayWatchlist() {
+  std::cout << name << "'s watchlist" << std::endl;
+  for(Stock* stock : watchlist.getStocks()) {
+    stock->display();
+  }
 }

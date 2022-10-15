@@ -7,15 +7,16 @@
 #include "Watchlist.h"
 
 class Member : public Account {
- private:
-  std::vector<Watchlist> watchlists;
+ protected:
+  Watchlist watchlist;
 
  public:
   Member(std::string password, std::string name, std::string phone,
-          std::string email, std::string status, std::string type):Account(password, name, phone, email, status, type){};
-  void removeWatchlist(std::string);
-  bool createWatchlis(std::string);
-  std::vector<Watchlist> getWatchlists();
+          std::string email, std::string status, std::string type);
+  Watchlist getWatchlist();
+  void addStock(Stock*);
+  void removeStock(Stock*);
+  void displayWatchlist();
 };
 
 #endif

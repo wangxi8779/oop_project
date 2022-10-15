@@ -11,9 +11,11 @@ class Watchlist {
   std::vector<Stock *> stocks;
 
  public:
-  bool addStock(Watchlist *Stock);
-  bool removeStock(Watchlist *Stock);
-  void displayWatchlist(std::string watchlistName);
+  Watchlist(){};
+  Watchlist(std::string);
+  void addStock(Stock*);
+  void removeStock(Stock*);
+  std::vector<Stock *> getStocks();
 };
 
 #endif

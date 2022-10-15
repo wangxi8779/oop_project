@@ -35,7 +35,17 @@ StockPortfolio* Trader::getStockPortfolio(Stock* stock) {
     }
   }
   
-  StockPortfolio stockPortfolio = StockPortfolio(stock);
-  stockPortfolios.push_back(stockPortfolio);
-  return &stockPortfolio;
+  StockPortfolio* stockPortfolio = new StockPortfolio(stock);
+  stockPortfolios.push_back(*stockPortfolio);
+  return stockPortfolio;
+}
+
+void Trader::displayWatchlist() {
+  std::cout << name << "'s watchlist" << std::endl;
+  for(Stock* stock : watchlist.getStocks()) {
+    stock->display();
+    StockPortfolio* stockPortfolio = getStockPortfolio(stock);
+    stockPortfolio->display();
+  }
+
 }

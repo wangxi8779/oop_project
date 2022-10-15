@@ -28,3 +28,7 @@ void Admin::upgrade(Account* account) {
 void Admin::downgrade(Account* account) {
   account->setType("member");
 }
+
+void Admin::displayWatchlist(){}
+void Admin::addStock(Stock* stock){}
+void Admin::removeStock(Stock* stock){}

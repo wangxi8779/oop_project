@@ -1,9 +1,9 @@
 a,a@gmail.com,12345,0430000000,active,admin
-b,b@gmail.com,12345,0430000001,blocked,member
-c,c@gmail.com,12345,0430000002,active,member
+b,b@gmail.com,12345,0430000001,active,member
+c,c@gmail.com,12345,0430000002,blocked,member
 d,d@gmail.com,12345,0430000003,active,trader
 e,e@gmail.com,12345,0430000004,active,trader
 f,f@gmail.com,12345,0430000005,active,trader
-g,g@gmail.com,12345,0430000006,active,trader
+g,g@gmail.com,12345,0430000006,blocked,trader
 h,h@gmail.com,12345,0430000007,active,trader
 i,i@gmail.com,12345,0430000008,active,trader

@@ -14,9 +14,11 @@ class Stock {
   std::vector<Order*> getOrders(bool);
 
  public:
+  Stock(std::string, double);
   double getPrice();
   bool insertOrder(Order*);
   bool removeOrder(Order*);
   void matchOrder(Order*);
+  void display();
 };
 #endif

@@ -34,3 +34,9 @@ bool StockPortfolio::cancelOrder(Order* order) {
 Stock* StockPortfolio::getStock() {
   return stock;
 }
+
+void StockPortfolio::display() {
+  std::cout << "average price - " << average_price << std::endl;
+  std::cout << "quantity - " << quantity << std::endl;
+  std::cout << "gain/loss - " << gain << std::endl;
+}

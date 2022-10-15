@@ -1,6 +1,12 @@
 #include "Stock.h"
 
+Stock::Stock(std::string name, double price) {
+  this->name = name;
+  this->price = price;
+}
+
 double Stock::getPrice() { return price; }
+
 bool Stock::insertOrder(Order* order) {
   std::vector<Order*> orders = getOrders(order->getIsBuyOrder());
   orders.push_back(order);
@@ -39,4 +45,8 @@ std::vector<Order*> Stock::getOrders(bool isBuyOrder) {
   } else {
     return sellOrders;
   }
+}
+
+void Stock::display() {
+  std::cout << name << " - " << price << std::endl;
 }
