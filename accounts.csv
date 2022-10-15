@@ -1,6 +1,5 @@
-name,email,password,phone,status,type
 a,a@gmail.com,12345,0430000000,active,admin
-b,b@gmail.com,12345,0430000001,active,member
+b,b@gmail.com,12345,0430000001,blocked,member
 c,c@gmail.com,12345,0430000002,active,member
 d,d@gmail.com,12345,0430000003,active,trader
 e,e@gmail.com,12345,0430000004,active,trader

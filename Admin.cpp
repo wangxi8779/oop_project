@@ -1,11 +1,30 @@
+#include <string>
 #include "Admin.h"
 
 using namespace std;
 
-bool Admin::block(Account account) {
-  return true;
+Admin::Admin(string password, string name, string phone, string email, string status, string type, StockMarket* stockMarket) {
+  this->password = password;
+  this->name = name;
+  this->phone = phone;
+  this->email = email;
+  this->status = status;
+  this->stockMarket = stockMarket;
+  this->type = type;
 }
 
-bool Admin::unblock(Account account) {
-  return true;
+void Admin::block(Account* account) {
+  account->setStatus("blocked");
+}
+
+void Admin::unblock(Account* account) {
+  account->setStatus("active");
+}
+
+void Admin::upgrade(Account* account) {
+  account->setType("trader");
+}
+
+void Admin::downgrade(Account* account) {
+  account->setType("member");
 }

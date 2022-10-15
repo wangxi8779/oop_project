@@ -1,5 +1,5 @@
 #ifndef TRADE_H;
-#define TRADE_H ;
+#define TRADE_H;
 #include <string>
 #include <vector>
 
@@ -14,7 +14,7 @@ class Trader : public Member {
 
  public:
   Trader(std::string password, std::string name, std::string phone,
-          std::string email, std::string status):Member(password, name, phone, email, status){};
+          std::string email, std::string status, std::string type):Member(password, name, phone, email, status, type){};
   double deposit(double);
   double withdraw(double);
   StockPortfolio* buy(Stock* stock, int quantity, double price,

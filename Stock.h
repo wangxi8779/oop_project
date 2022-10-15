@@ -11,7 +11,7 @@ class Stock {
   std::string name;
   std::vector<Order*> buyOrders;
   std::vector<Order*> sellOrders;
-  std::vector<Order*> Stock::getOrders(bool);
+  std::vector<Order*> getOrders(bool);
 
  public:
   double getPrice();

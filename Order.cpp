@@ -16,7 +16,7 @@ void Order::cancel() {
 }
 
 bool Order::isFilled() {
-  status == "filled";
+  return status == "filled";
 }
 
 bool Order::getIsBuyOrder() {
