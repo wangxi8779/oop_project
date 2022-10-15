@@ -11,6 +11,8 @@ class Member : public Account {
   std::vector<Watchlist> watchlists;
 
  public:
+  Member(std::string password, std::string name, std::string phone,
+          std::string email, std::string status):Account(password, name, phone, email, status){};
   void removeWatchlist(std::string);
   bool createWatchlis(std::string);
   std::vector<Watchlist> getWatchlists();

@@ -3,20 +3,23 @@
 #include <string>
 #include <vector>
 
-#include "Account.h"
+#include "Member.h"
 #include "StockPortfolio.h"
 
-class Trade : public Account {
+class Trader : public Member {
  private:
   double balance;
-  std::vector<StockPortfolio> portfolio;
+  std::vector<StockPortfolio> stockPortfolios;
+  StockPortfolio* getStockPortfolio(Stock*);
 
  public:
+  Trader(std::string password, std::string name, std::string phone,
+          std::string email, std::string status):Account(password, name, phone, email, status){};
   double deposit(double);
   double withdraw(double);
-  stockPortfolio buy(Stock *stock, int quantity, double price,
+  StockPortfolio* buy(Stock* stock, int quantity, double price,
                      std::string orderType);
-  stockPortfolio sell(Stock *stock, int quantity, double price,
+  StockPortfolio* sell(Stock* stock, int quantity, double price,
                       std::string orderType);
 };
 #endif

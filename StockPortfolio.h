@@ -17,9 +17,10 @@ class StockPortfolio {
  public:
   StockPortfolio();
   StockPortfolio(Stock*);
-  bool place_order(Order*);
-  bool cancel_order(Order*);
+  bool placeOrder(Order*);
+  bool cancelOrder(Order*);
   double withdraw(double);
+  Stock* getStock();
   void display();
 };
 #endif

@@ -13,7 +13,7 @@ class Account {
  public:
   Account();
   Account(std::string password, std::string name, std::string phone,
-          std::string email);
+          std::string email, std::string status);
   bool login(std::string email, std::string password);
 };
 #endif

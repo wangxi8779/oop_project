@@ -5,12 +5,12 @@ using namespace std;
 
 Account::Account(){}
 
-Account::Account(string password, string name, string phone, string email) {
+Account::Account(string password, string name, string phone, string email, string status) {
   this->password = password;
   this->name = name;
   this->phone = phone;
   this->email = email;
-  this->status = "active";
+  this->status = status;
 }
 
 bool Account::login(string email, string password){

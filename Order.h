@@ -7,13 +7,17 @@
 
 class Order {
  private:
-  bool is_buy_order;
+  bool isBuyOrder;
   std::string status;
   int quantity;
   std::vector<Transaction> transactions;
 
  public:
-  void match();
+  Order(double, int, bool);
+  bool match(Order*);
+  void cancel();
   bool addTransaction(Transaction);
+  bool isFilled();
+  bool getIsBuyOrder();
 };
 #endif

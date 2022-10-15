@@ -1,3 +1,4 @@
+#include <iostream>
 #include "StockPortfolio.h"
 
 StockPortfolio::StockPortfolio() {}
@@ -9,16 +10,27 @@ StockPortfolio::StockPortfolio(Stock* stock) {
   this->quantity = 0;
 }
 
-bool StockPortfolio::place_order(Order* order) {
+bool StockPortfolio::placeOrder(Order* order) {
   orders.push_back(order);
+  stock->matchOrder(order);
   return true;
 }
-bool StockPortfolio::cancel_order(Order* order) {
+bool StockPortfolio::cancelOrder(Order* order) {
   for(int i = 0; i < orders.size(); i++) {
     if (orders.at(i) == order) {
-      orders.deleteAt(i);
-      return true;
+      if (order->isFilled()) {
+        std::cout << "This order is filled, cannot cancel." << std::endl;
+        return false;
+      } else {
+        order->cancel();
+        return true;
+      }
     }
   }
+  std::cout << "This order is not found, cannot cancel." << std::endl;
   return false;
+}
+
+Stock* StockPortfolio::getStock() {
+  return stock;
 }
