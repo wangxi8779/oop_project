@@ -9,10 +9,10 @@ class Stock {
  private:
   double price;
   std::string name;
-  std::vector<Orders*> orders;
+  std::vector<Order*> orders;
 
  public:
-  double get_price();
+  double getPrice();
   bool addOrder(Order*);
   bool removeOrder(Order*);
   void matchOrder();

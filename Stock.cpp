@@ -1,6 +1,6 @@
 #include "Stock.h"
 
-double Stock::get_price() { return price; }
+double Stock::getPrice() { return price; }
 bool Stock::addOrder(Order* order) {
   orders.push_back(order);
   matchOrder();
