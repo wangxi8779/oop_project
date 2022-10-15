@@ -9,7 +9,7 @@
 class Trader : public Member {
  private:
   double balance;
-  std::vector<StockPortfolio> stockPortfolios;
+  std::vector<StockPortfolio> stockPortfolios; 
   StockPortfolio* getStockPortfolio(Stock*);
 
  public:

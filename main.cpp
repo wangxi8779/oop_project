@@ -4,7 +4,7 @@
 #include <vector>
 
 #include "Account.h"
-// #include "Trader.h"
+//#include "Trader.h"
 using namespace std;
 
 int main() {
@@ -30,30 +30,30 @@ int main() {
     }
     accounts.push_back(account);
   }
-  cout << accounts.size() << endl;
+   
 
   // read accounts from a csv file
   
 
   // Login
-  // Account* currentUser = NULL;
-  // while (!currentUser) {
-  //   string email;
-  //   string password;
-  //   cout << "please input email" << endl;
-  //   cin >> email;
-  //   cout << "please input password" << endl;
-  //   cin >> password;
-  //   for (int i = 0; i < 10; i++) {
-  //     if (accounts[i].login(email, password)) {
-  //       currentUser = &accounts[i];
-  //       break;
-  //     }
-  //   }
-  //   if (currentUser) {
-  //     cout << "login successfully" << endl;
-  //   } else {
-  //     cout << "email or password is incorrect, please input again" << endl;
-  //   }
-  // }
+  Account* currentUser = NULL;
+  while (!currentUser) {
+    string email;
+    string password;
+    cout << "please input email" << endl;
+    cin >> email;
+    cout << "please input password" << endl;
+    cin >> password;
+    for (int i = 0; i < 10; i++) {
+      if (accounts[i].login(email, password)) {
+        currentUser = &accounts[i];
+        break;
+      }
+    }
+    if (currentUser) {
+      cout << "login successfully" << endl;
+    } else {
+      cout << "email or password is incorrect, please input again" << endl;
+    }
+  }
 }

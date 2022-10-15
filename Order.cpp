@@ -12,11 +12,11 @@ bool Order::match(Order* order) {
 }
 
 void Order::cancel() {
-  status = 'cancelled';
+  status = "cancelled";
 }
 
 bool Order::isFilled() {
-  status = 'filled';
+  status == "filled";
 }
 
 bool Order::getIsBuyOrder() {
