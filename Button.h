@@ -14,8 +14,8 @@ class Button
     
  public:
   sf::RectangleShape recB; 
-  // need to add a default constructor
   Button(sf::RectangleShape s_button, int bWidth, int bLength, int red, int gre, int blue);
+  Button();
   void setPos(int x_pos, int y_pos);
   ~Button();
 };
