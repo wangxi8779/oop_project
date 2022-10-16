@@ -11,6 +11,10 @@ bool Order::match(Order* order) {
   return true;
 }
 
+double Order::bidPrice() {
+  return 0;
+}
+
 void Order::cancel() {
   status = "cancelled";
 }
@@ -21,6 +25,10 @@ bool Order::isFilled() {
 
 bool Order::getIsBuyOrder() {
   return isBuyOrder;
+}
+
+int Order::getQuantity() {
+  return quantity;
 }
 
 bool Order::addTransaction(Transaction transaction) {

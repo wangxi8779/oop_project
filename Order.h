@@ -7,7 +7,7 @@
 #include "Transaction.h"
 
 class Order {
- private:
+ protected:
   bool isBuyOrder;
   std::string status;
   int quantity;
@@ -15,10 +15,12 @@ class Order {
 
  public:
   Order(double, int, bool);
-  bool match(Order*);
+  virtual bool match(Order*);
+  virtual double bidPrice();
   void cancel();
   bool addTransaction(Transaction);
   bool isFilled();
   bool getIsBuyOrder();
+  int getQuantity();
 };
 #endif

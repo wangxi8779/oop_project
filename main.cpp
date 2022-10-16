@@ -15,6 +15,8 @@ int main() {
   Stock s1 = Stock("Tesla", 100.5);
   Stock s2 = Stock("Apple", 90);
   Stock s3 = Stock("Google", 1000.3);
+  Stock s4 = Stock("Amazon", 133);
+  Stock s5 = Stock("Meta", 122);
   StockMarket stockMarket = StockMarket(stocks);
 
   // Login

@@ -9,32 +9,60 @@ double Stock::getPrice() { return price; }
 
 bool Stock::insertOrder(Order* order) {
   std::vector<Order*> orders = getOrders(order->getIsBuyOrder());
+  for(int i = 0; i < orders.size(); i++) {
+    // working in progress
+  }
   orders.push_back(order);
   return true;
 }
+
 bool Stock::removeOrder(Order* order) {
-  std::vector<Order*> orders = getOrders(order->getIsBuyOrder());
-  for (int i = 0; i < orders.size(); i++) {
-    if (orders.at(i) == order) {
-      orders.erase(orders.begin() + i);
-      return true;
+  if (order->getIsBuyOrder()) {
+    for (int i = 0; i < buyOrders.size(); i++) {
+      if (buyOrders.at(i) == order) {
+        buyOrders.erase(buyOrders.begin() + i);
+        return true;
+      }
+    }
+  } else {
+    for (int i = 0; i < sellOrders.size(); i++) {
+      if (sellOrders.at(i) == order) {
+        sellOrders.erase(sellOrders.begin() + i);
+        return true;
+      }
     }
   }
   return false;
 }
+
 void Stock::matchOrder(Order* order) {
-  std::vector<Order*> pendingOrders = getOrders(!(order->getIsBuyOrder()));
-  for(Order* pendingOrder : pendingOrders) {
-    if (pendingOrder->match(order)) {
-      if(pendingOrder->isFilled()) {
-        pendingOrders.erase(pendingOrders.begin());
+  if (order->getIsBuyOrder()) {
+    for(Order* sellOrder : sellOrders) {
+      if (sellOrder->match(order)) {
+        if(sellOrder->isFilled()) {
+          sellOrders.erase(sellOrders.begin());
+        }
+        if(order->isFilled()) {
+          return;
+        }
       }
-      if(order->isFilled()) {
-        return;
+      else {
+        insertOrder(order);
       }
     }
-    else {
-      insertOrder(order);
+  } else {
+    for(Order* buyOrder : buyOrders) {
+      if (buyOrder->match(order)) {
+        if(buyOrder->isFilled()) {
+          buyOrders.erase(buyOrders.begin());
+        }
+        if(order->isFilled()) {
+          return;
+        }
+      }
+      else {
+        insertOrder(order);
+      }
     }
   }
 }
