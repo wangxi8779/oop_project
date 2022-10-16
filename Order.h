@@ -5,22 +5,30 @@
 #include <vector>
 
 #include "Transaction.h"
+#include "Stock.h"
 
 class Order {
  protected:
+  Stock* stock;
   bool isBuyOrder;
   std::string status;
   int quantity;
+  int filledQuantity;
   std::vector<Transaction> transactions;
 
  public:
-  Order(double, int, bool);
+  Order(){};
+  Order(Stock* stock, double, int, bool);
   virtual bool match(Order*);
   virtual double bidPrice();
   void cancel();
-  bool addTransaction(Transaction);
+  std::vector<Transaction> getTransactions();
+  void addTransaction(Transaction);
   bool isFilled();
   bool getIsBuyOrder();
+  bool isMarketOrder();
   int getQuantity();
+  int getFilledQuantity();
+  int getUnfilledQuantity();
 };
 #endif

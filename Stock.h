@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-#include "Order.h"
+class Order;
 
 class Stock {
  private:
@@ -17,8 +17,9 @@ class Stock {
  public:
   Stock(std::string, double);
   double getPrice();
-  bool insertOrder(Order*);
-  bool removeOrder(Order*);
+  void setPrice(double);
+  void insertOrder(Order*);
+  void removeOrder(Order*);
   void matchOrder(Order*);
   void display();
 };

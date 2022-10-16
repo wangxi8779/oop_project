@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Member.h"
 
 Member::Member(std::string password, std::string name, std::string phone, std::string email, std::string status, std::string type) {

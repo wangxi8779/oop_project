@@ -6,6 +6,7 @@
 
 #include "Account.h"
 #include "Watchlist.h"
+#include "StockPortfolio.h"
 
 class Member : public Account {
  protected:
@@ -18,6 +19,10 @@ class Member : public Account {
   void addStock(Stock*);
   void removeStock(Stock*);
   void displayWatchlist();
+  StockPortfolio* buy(Stock* stock, int quantity, double price,
+                     std::string orderType) {return NULL;};
+  StockPortfolio* sell(Stock* stock, int quantity, double price,
+                      std::string orderType) {return NULL;};
 };
 
 #endif

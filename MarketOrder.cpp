@@ -1,6 +1,7 @@
 #include "MarketOrder.h"
 
-MarketOrder::MarketOrder(int quantity, bool isBuyOrder) {
+MarketOrder::MarketOrder(Stock* stock, int quantity, bool isBuyOrder) {
+  this->stock = stock;
   this->quantity = quantity;
   this->isBuyOrder = isBuyOrder;
   this->status = "pending";
@@ -25,4 +26,8 @@ double MarketOrder::bidPrice() {
   } else {
     return -1;
   }
+}
+
+bool MarketOrder::isMarketOrder() {
+  return true;
 }

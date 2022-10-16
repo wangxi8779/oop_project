@@ -11,7 +11,7 @@ class StopOrder : public MarketOrder {
   double price;
 
  public:
-  StopOrder(double, int, bool);
+  StopOrder(Stock*, double, int, bool);
   bool match(Order*);
 };
 #endif

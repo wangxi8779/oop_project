@@ -10,7 +10,7 @@
 class StockPortfolio {
  private:
   Stock* stock;
-  double average_price;
+  double averagePrice;
   double gain;
   int quantity;
   std::vector<Order*> orders;
@@ -18,10 +18,13 @@ class StockPortfolio {
  public:
   StockPortfolio();
   StockPortfolio(Stock*);
+  StockPortfolio(Stock*, int);
   bool placeOrder(Order*);
   bool cancelOrder(Order*);
   double withdraw(double);
   Stock* getStock();
+  int getQuantity();
   void display();
+  void refresh();
 };
 #endif

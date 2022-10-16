@@ -1,6 +1,7 @@
 #include "StopOrder.h"
 
-StopOrder::StopOrder(double price, int quantity, bool isBuyOrder) {
+StopOrder::StopOrder(Stock* stock, double price, int quantity, bool isBuyOrder) {
+  this->stock = stock;
   this->price = price;
   this->quantity = quantity;
   this->isBuyOrder = isBuyOrder;

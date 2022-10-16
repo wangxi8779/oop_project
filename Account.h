@@ -3,6 +3,7 @@
 
 #include <string>
 #include "Stock.h"
+#include "StockPortfolio.h"
 
 class Account {
  protected:
@@ -12,6 +13,7 @@ class Account {
   std::string type;
   std::string phone;
   std::string email;
+  double balance;
 
  public:
   Account();
@@ -27,5 +29,11 @@ class Account {
   virtual void displayWatchlist(){};
   virtual void addStock(Stock*){};
   virtual void removeStock(Stock*){};
+  virtual StockPortfolio* buy(Stock* stock, int quantity, double price,
+                     std::string orderType) {return NULL;};
+  virtual StockPortfolio* sell(Stock* stock, int quantity, double price,
+                      std::string orderType) {return NULL;};
+  double deposit(double);
+  double withdraw(double);
 };
 #endif

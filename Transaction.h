@@ -1,16 +1,20 @@
-//if there is anything that you would want to change 
-//or if there is a problem with my code please let me know in the group chat
-#ifndef TRANSACTION
-#define TRANSACTION
-#include <iostream>
+#ifndef TRANSACTION_H
+#define TRANSACTION_H
+
 #include <string>
-class Transaction{
-public:
-//to make sure that both values can be outputed by the one function they are both stored in one array
-double info[];
-Transaction();
-Transaction(double price,double quality);
-~Transaction();
-double* display();
+#include <vector>
+
+class Transaction {
+ private:
+  double price;
+  int quantity;
+
+ public:
+  Transaction();
+  Transaction(double, int);
+  int getQuantity();
+  double getPrice();
+  void display();
+  ~Transaction();
 };
 #endif

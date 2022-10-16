@@ -5,9 +5,16 @@ StockPortfolio::StockPortfolio() {}
 
 StockPortfolio::StockPortfolio(Stock* stock) {
   this->stock = stock;
-  this->average_price = 0;
+  this->averagePrice = 0;
   this->gain = 0;
   this->quantity = 0;
+}
+
+StockPortfolio::StockPortfolio(Stock* stock, int quantity) {
+  this->stock = stock;
+  this->averagePrice = 0;
+  this->gain = 0;
+  this->quantity = quantity;
 }
 
 bool StockPortfolio::placeOrder(Order* order) {
@@ -35,8 +42,36 @@ Stock* StockPortfolio::getStock() {
   return stock;
 }
 
+int StockPortfolio::getQuantity() {
+  return quantity;
+}
+
 void StockPortfolio::display() {
-  std::cout << "average price - " << average_price << std::endl;
+  refresh();
+  std::cout << "average price - " << averagePrice << std::endl;
   std::cout << "quantity - " << quantity << std::endl;
   std::cout << "gain/loss - " << gain << std::endl;
 }
+
+void StockPortfolio::refresh() {
+  double totalPaid = 0;
+  int totalQuantity = 0;
+  for(Order* order : orders) {
+    bool isBuyOrder = order->getIsBuyOrder();
+    for(Transaction transaction : order->getTransactions()) {
+      if (isBuyOrder) {
+        totalQuantity += transaction.getQuantity();
+        totalPaid += transaction.getPrice() * transaction.getQuantity();
+      } else {
+        totalQuantity -= transaction.getQuantity();
+        totalPaid -= transaction.getPrice() * transaction.getQuantity();
+      }
+    }
+  }
+  if (totalQuantity > 0) {
+    averagePrice = totalPaid / totalQuantity;
+  }
+  quantity = totalQuantity;
+  gain = stock->getPrice() * quantity - totalPaid;
+}
+

@@ -55,3 +55,16 @@ string Account::toRow() {
   return result;
 }
 
+double Account::deposit(double amount)
+{
+  balance += amount;
+  return balance;
+}
+
+double Account::withdraw(double amount)
+{
+  balance -= amount;
+  return balance;
+}
+
+

@@ -19,6 +19,10 @@ class Admin : public Account {
   void displayWatchlist();
   void addStock(Stock*);
   void removeStock(Stock*);
+  StockPortfolio* buy(Stock* stock, int quantity, double price,
+                     std::string orderType) {return NULL;};
+  StockPortfolio* sell(Stock* stock, int quantity, double price,
+                      std::string orderType) {return NULL;};
 };
 
 #endif

@@ -9,11 +9,11 @@
 class StockMarket {
  private:
   std::vector<Account*> accounts;
-  std::vector<Stock> stocks;
+  std::vector<Stock*> stocks;
   void loadAccounts();
 
  public:
-  StockMarket(std::vector<Stock>);
+  StockMarket(std::vector<Stock*>);
   void updateAccounts();
   Account* login(std::string, std::string);
   Account* findAccount(std::string);

@@ -9,19 +9,17 @@
 
 class Trader : public Member {
  private:
-  double balance;
   std::vector<StockPortfolio> stockPortfolios; 
-  StockPortfolio* getStockPortfolio(Stock*);
 
  public:
   Trader(std::string password, std::string name, std::string phone,
           std::string email, std::string status, std::string type):Member(password, name, phone, email, status, type){};
-  double deposit(double);
-  double withdraw(double);
   StockPortfolio* buy(Stock* stock, int quantity, double price,
                      std::string orderType);
   StockPortfolio* sell(Stock* stock, int quantity, double price,
                       std::string orderType);
+  StockPortfolio* getStockPortfolio(Stock*);
+  void addStockPortfolio(StockPortfolio);
   void displayWatchlist();
 };
 #endif

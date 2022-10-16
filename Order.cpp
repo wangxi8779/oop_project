@@ -1,8 +1,9 @@
 #include "Order.h"
 
-Order::Order(double price, int quantity, bool isBuyOrder) {
-  // this->price = price;
+Order::Order(Stock* stock, double price, int quantity, bool isBuyOrder) {
+  this->stock = stock;
   this->quantity = quantity;
+  this->filledQuantity = 0;
   this->isBuyOrder = isBuyOrder;
   this->status = "pending";
 }
@@ -27,11 +28,30 @@ bool Order::getIsBuyOrder() {
   return isBuyOrder;
 }
 
+bool Order::isMarketOrder() {
+  return false;
+}
+
 int Order::getQuantity() {
   return quantity;
 }
 
-bool Order::addTransaction(Transaction transaction) {
+int Order::getFilledQuantity() {
+  return filledQuantity;
+}
+
+int Order::getUnfilledQuantity() {
+  return quantity - filledQuantity;
+}
+
+void Order::addTransaction(Transaction transaction) {
+  filledQuantity += transaction.getQuantity();
+  if (filledQuantity >= quantity) {
+    status = "filled";
+  }
   transactions.push_back(transaction);
-  return true;
+}
+
+std::vector<Transaction> Order::getTransactions() {
+  return transactions;
 }

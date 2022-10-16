@@ -4,7 +4,7 @@
 #include "Admin.h"
 #include "Trader.h"
 
-StockMarket::StockMarket(std::vector<Stock> stocks) {
+StockMarket::StockMarket(std::vector<Stock*> stocks) {
   this->stocks = stocks;
   loadAccounts();
 }

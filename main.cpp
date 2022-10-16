@@ -8,19 +8,28 @@
 #include "Trader.h"
 #include "Stock.h"
 #include "StockMarket.h"
+#include "LimitOrder.h"
 using namespace std;
 
 int main() {
-  vector<Stock> stocks;
-  Stock s1 = Stock("Tesla", 100.5);
-  Stock s2 = Stock("Apple", 90);
-  Stock s3 = Stock("Google", 1000.3);
-  Stock s4 = Stock("Amazon", 133);
-  Stock s5 = Stock("Meta", 122);
+  Stock* s1 = new Stock("Tesla", 100.5);
+  //queue buy orders
+  s1->insertOrder(new LimitOrder(s1, 90, 10, true));
+  s1->insertOrder(new LimitOrder(s1, 100, 10, true));
+  //queue sell orders
+  s1->insertOrder(new LimitOrder(s1, 105, 5, false));
+  s1->insertOrder(new LimitOrder(s1, 108, 5, false));
+  s1->insertOrder(new LimitOrder(s1, 120, 12, false));
+  Stock* s2 = new Stock("Apple", 90);
+  Stock* s3 = new Stock("Google", 1000.3);
+  Stock* s4 = new Stock("Amazon", 133);
+  Stock* s5 = new Stock("Meta", 122);
+  vector<Stock*> stocks = {s1, s2, s3, s4, s5};
   StockMarket stockMarket = StockMarket(stocks);
 
   // Login
-  Account* currentUser = NULL;
+  // Account* currentUser = NULL;
+  Account* currentUser = stockMarket.findAccount("e"); //skip login for test
   while (!currentUser) {
     string email;
     string password;
@@ -76,15 +85,23 @@ int main() {
 
   // Login as member
   else if(currentUser->getType() == "member") {
-    currentUser->addStock(&s1);
-    currentUser->addStock(&s2);
+    currentUser->addStock(s1);
+    currentUser->addStock(s2);
     currentUser->displayWatchlist();
   }
 
   // Login as trader
   else if(currentUser->getType() == "trader") {
-    currentUser->addStock(&s2);
-    currentUser->addStock(&s3);
+    currentUser->addStock(s1);
+    // currentUser->addStock(s2);
+    // currentUser->addStock(s3);
+    // currentUser->addStock(s4);
+    // currentUser->addStock(s5);
+    // currentUser->displayWatchlist();
+    currentUser->buy(s1, 5, 105, "limit");
+    currentUser->deposit(1000000000);
+    currentUser->buy(s1, 10, 108, "limit");
+    s1->display();
     currentUser->displayWatchlist();
   }
 }
