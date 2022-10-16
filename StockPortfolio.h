@@ -1,5 +1,6 @@
-#ifndef STOCKPORTFOLIO_H;
-#define STOCKPORTFOLIO_H ;
+#ifndef STOCKPORTFOLIO_H
+#define STOCKPORTFOLIO_H
+
 #include <string>
 #include <vector>
 

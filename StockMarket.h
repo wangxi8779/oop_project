@@ -1,5 +1,6 @@
 #ifndef STOCK_MARKET_H
 #define STOCK_MARKET_H
+
 #include <string>
 #include <vector>
 #include "Account.h"

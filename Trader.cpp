@@ -29,12 +29,12 @@ StockPortfolio* Trader::sell(Stock* stock, int quantity, double price, std::stri
 }
 
 StockPortfolio* Trader::getStockPortfolio(Stock* stock) {
-  for(StockPortfolio sp : stockPortfolios) {
-    if (sp.getStock() == stock) {
-      return &sp;
+  for(int i = 0; i < stockPortfolios.size(); i++) {
+    if (stockPortfolios.at(i).getStock() == stock) {
+      return &stockPortfolios.at(i);
     }
   }
-  
+
   StockPortfolio* stockPortfolio = new StockPortfolio(stock);
   stockPortfolios.push_back(*stockPortfolio);
   return stockPortfolio;

@@ -1,5 +1,6 @@
-#ifndef MEMBER_H;
-#define MEMBER_H ;
+#ifndef MEMBER_H
+#define MEMBER_H
+
 #include <string>
 #include <vector>
 

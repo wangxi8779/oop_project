@@ -8,7 +8,7 @@ Order::Order(double price, int quantity, bool isBuyOrder) {
 }
 
 bool Order::match(Order* order) {
-
+  return true;
 }
 
 void Order::cancel() {

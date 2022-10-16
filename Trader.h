@@ -1,5 +1,6 @@
-#ifndef TRADE_H;
-#define TRADE_H;
+#ifndef TRADE_H
+#define TRADE_H
+
 #include <string>
 #include <vector>
 

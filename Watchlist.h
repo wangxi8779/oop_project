@@ -1,5 +1,6 @@
-#ifndef WATCHLIST_H;
-#define WATCHLIST_H ;
+#ifndef WATCHLIST_H
+#define WATCHLIST_H
+
 #include <string>
 #include <vector>
 

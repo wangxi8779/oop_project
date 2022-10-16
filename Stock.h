@@ -1,5 +1,6 @@
-#ifndef STOCK_H;
-#define STOCK_H ;
+#ifndef STOCK_H
+#define STOCK_H
+
 #include <string>
 #include <vector>
 
