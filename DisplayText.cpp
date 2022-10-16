@@ -40,6 +40,11 @@ void DisplayText :: change_text(std::string newText)
   textObj.setString(_text);
 }
 
+std::string DisplayText :: return_text()
+{
+  return _text;
+}
+
 DisplayText :: ~DisplayText()
 {
 }

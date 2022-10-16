@@ -52,13 +52,31 @@ int main()
   b6.setPos(140, 170);
 
   sf::RectangleShape price_overview;
-  Button b7(print_money_b, 500, 125, 150, 150, 150);
-  b7.setPos(270,460);
+  Button b7(print_money_b, 550, 100, 150, 150, 150);
+  b7.setPos(270,440);
 
   sf::RectangleShape _bank;
-  Button b8(_bank, 150,100, 170, 170, 170);
-  b8.setPos(820,460);
-  
+  Button b8(_bank, 150, 65, 170, 170, 170);
+  b8.setPos(840,440);
+
+  // vertical lines to seperate stock options in price_overview
+  sf::RectangleShape line1, line2, line3, line4;
+  Button line_b1(line1, 100, 3, 255,255,255);
+  line_b1.setPos(380,440);
+  line_b1.recB.rotate(90);
+
+  Button line_b2(line2, 100, 3, 255,255,255);
+  line_b2.setPos(490,440);
+  line_b2.recB.rotate(90);
+
+  Button line_b3(line3, 100, 3, 255,255,255);
+  line_b3.setPos(600,440);
+  line_b3.recB.rotate(90);
+
+  Button line_b4(line4, 100, 3, 255,255,255);
+  line_b4.setPos(710,440);
+  line_b4.recB.rotate(90);
+
 
   //loading in font
   sf::Font font;
@@ -95,8 +113,8 @@ int main()
   sellOrder_t.setPos(145, 105);
   (sellOrder_t.textObj).setFont(font);
 
-  DisplayText usr_t("Change User", change_usr, 20);
-  usr_t.setPos(12, 185);
+  DisplayText usr_t("Login", change_usr, 20);
+  usr_t.setPos(40, 185);
   (usr_t.textObj).setFont(font);
 
   DisplayText add_bank_t("Add Income", add_bank, 20);
@@ -104,7 +122,7 @@ int main()
   (add_bank_t.textObj).setFont(font);
 
   DisplayText balance_t(std::to_string(balance), balance_text, 20);
-  balance_t.setPos(820, 475);
+  balance_t.setPos(840, 440);
   (balance_t.textObj).setFont(font);
 
 
@@ -131,7 +149,6 @@ int main()
   DisplayText arrowAmount(std::to_string(purchaseAmount), purchaseAmount_text, 30);
   arrowAmount.setPos(120,298);
   (arrowAmount.textObj).setFont(font);
-
   
   // main loop
   while (window.isOpen())
@@ -200,9 +217,18 @@ int main()
 	      if (event.mouseButton.button == sf::Mouse::Left && event.mouseButton.x >= 10
 		  && event.mouseButton.x <= 130 && event.mouseButton.y >= 170 && event.mouseButton.y <= 230)
 		{
-		  std :: cout << "change user button clicked" << std :: endl;
+		  if(usr_t.return_text() == "Login")
+		    {
+		      usr_t.change_text("Logout");
+		      break;
+		    }
+		  if(usr_t.return_text() == "Logout")
+		    {
+		      usr_t.change_text("Login");
+		      break;
+		    }
 		}
-
+	      
 	      // plus and minus arrow buttons
 	      if (event.mouseButton.button == sf::Mouse::Left && event.mouseButton.x >= 105
 		  && event.mouseButton.x <= 170 && event.mouseButton.y >= 250 && event.mouseButton.y <= 295)
@@ -244,6 +270,10 @@ int main()
 	window.draw(trianglePlus);
 	window.draw(triangleMinus);
 	window.draw(b_purchaseAmount.recB);
+	window.draw(line_b1.recB);
+	window.draw(line_b2.recB);
+	window.draw(line_b3.recB);
+	window.draw(line_b4.recB);
 	
 	window.draw(text);
 	window.draw(buy_t.textObj);
@@ -257,7 +287,6 @@ int main()
 	window.draw(minus_t.textObj);
 	window.draw(arrowAmount.textObj);
 
-	
 	window.display();
     }
     return 0;

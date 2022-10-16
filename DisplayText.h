@@ -21,6 +21,7 @@ class DisplayText
   void setColor(int aRed, int aGreen, int aBlue);
   void setPos(int _x, int _y);
   void change_text(std::string newText);
+  std::string return_text();
   ~DisplayText();
 };
 #endif
