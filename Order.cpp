@@ -44,8 +44,14 @@ int Order::getUnfilledQuantity() {
   return quantity - filledQuantity;
 }
 
+std::string Order::getStatus() {
+  return status;
+}
+
 void Order::addTransaction(Transaction transaction) {
   filledQuantity += transaction.getQuantity();
+
+  // if fully filled, update order status
   if (filledQuantity >= quantity) {
     status = "filled";
   }

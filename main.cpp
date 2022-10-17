@@ -28,8 +28,8 @@ int main() {
   StockMarket stockMarket = StockMarket(stocks);
 
   // Login
-  // Account* currentUser = NULL;
-  Account* currentUser = stockMarket.findAccount("e"); //skip login for test
+  Account* currentUser = NULL;
+  // Account* currentUser = stockMarket.findAccount("e"); //skip login for test
   while (!currentUser) {
     string email;
     string password;
@@ -100,8 +100,15 @@ int main() {
     // currentUser->displayWatchlist();
     currentUser->buy(s1, 5, 105, "limit");
     currentUser->deposit(1000000000);
-    currentUser->buy(s1, 10, 108, "limit");
-    s1->display();
+    currentUser->buy(s1, 8, 108, "limit");
+    currentUser->buy(s1, 10, 118, "limit");
+    currentUser->displayWatchlist();
+    currentUser->sell(s1, 2, 117, "limit");
+    currentUser->displayWatchlist();
+
+    currentUser->buy(s1, 2, 0, "market");
+    currentUser->displayWatchlist();
+    currentUser->sell(s1, 2, 0, "market");
     currentUser->displayWatchlist();
   }
 }

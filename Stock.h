@@ -19,7 +19,6 @@ class Stock {
   double getPrice();
   void setPrice(double);
   void insertOrder(Order*);
-  void removeOrder(Order*);
   void matchOrder(Order*);
   void display();
 };

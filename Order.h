@@ -30,5 +30,6 @@ class Order {
   int getQuantity();
   int getFilledQuantity();
   int getUnfilledQuantity();
+  std::string getStatus();
 };
 #endif

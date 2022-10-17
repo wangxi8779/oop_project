@@ -18,10 +18,13 @@ StockPortfolio::StockPortfolio(Stock* stock, int quantity) {
 }
 
 bool StockPortfolio::placeOrder(Order* order) {
+  // save order reference as buy/sell history
   orders.push_back(order);
+  // match order, searching from pending orders of the stock
   stock->matchOrder(order);
   return true;
 }
+
 bool StockPortfolio::cancelOrder(Order* order) {
   for(int i = 0; i < orders.size(); i++) {
     if (orders.at(i) == order) {
@@ -50,12 +53,16 @@ void StockPortfolio::display() {
   refresh();
   std::cout << "average price - " << averagePrice << std::endl;
   std::cout << "quantity - " << quantity << std::endl;
+  std::cout << "market value - " << stock->getPrice() * quantity << std::endl;
   std::cout << "gain/loss - " << gain << std::endl;
 }
 
+// stock protfolio will not get updated when stock/orders changed
+// need to proactively get data using references
 void StockPortfolio::refresh() {
   double totalPaid = 0;
   int totalQuantity = 0;
+  // loop all orders to get latest transactions
   for(Order* order : orders) {
     bool isBuyOrder = order->getIsBuyOrder();
     for(Transaction transaction : order->getTransactions()) {
@@ -72,6 +79,8 @@ void StockPortfolio::refresh() {
     averagePrice = totalPaid / totalQuantity;
   }
   quantity = totalQuantity;
+
+  // gain = market value - total invested money
   gain = stock->getPrice() * quantity - totalPaid;
 }
 

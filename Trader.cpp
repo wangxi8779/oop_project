@@ -43,25 +43,25 @@ StockPortfolio* Trader::sell(Stock* stock, int quantity, double price, std::stri
 }
 
 StockPortfolio* Trader::getStockPortfolio(Stock* stock) {
+  // find portfolio by given stock
   for(int i = 0; i < stockPortfolios.size(); i++) {
     if (stockPortfolios.at(i).getStock() == stock) {
+      stockPortfolios.at(i).refresh();
       return &stockPortfolios.at(i);
     }
   }
 
+  // if not exists, create a new one
   StockPortfolio* stockPortfolio = new StockPortfolio(stock);
   stockPortfolios.push_back(*stockPortfolio);
   return stockPortfolio;
-}
-
-void Trader::addStockPortfolio(StockPortfolio portfolio) {
-  stockPortfolios.push_back(portfolio);
 }
 
 void Trader::displayWatchlist() {
   std::cout << name << "'s watchlist" << std::endl;
   for(Stock* stock : watchlist.getStocks()) {
     stock->display();
+    // display stock protfolio only for trader
     StockPortfolio* stockPortfolio = getStockPortfolio(stock);
     stockPortfolio->display();
   }
