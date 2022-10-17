@@ -4,8 +4,8 @@
 #include <string>
 #include <vector>
 
-#include "Transaction.h"
 #include "Stock.h"
+#include "Transaction.h"
 
 class Order {
  protected:
@@ -31,5 +31,6 @@ class Order {
   int getFilledQuantity();
   int getUnfilledQuantity();
   std::string getStatus();
+  ~Order();
 };
 #endif

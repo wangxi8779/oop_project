@@ -21,5 +21,6 @@ class Stock {
   void insertOrder(Order*);
   void matchOrder(Order*);
   void display();
+  ~Stock();
 };
 #endif

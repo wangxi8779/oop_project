@@ -26,5 +26,6 @@ class StockPortfolio {
   int getQuantity();
   void display();
   void refresh();
+  ~StockPortfolio();
 };
 #endif

@@ -23,6 +23,7 @@ class Admin : public Account {
                      std::string orderType) {return NULL;};
   StockPortfolio* sell(Stock* stock, int quantity, double price,
                       std::string orderType) {return NULL;};
+  ~Admin();
 };
 
 #endif

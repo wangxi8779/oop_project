@@ -61,3 +61,15 @@ Account* StockMarket::findAccount(std::string name) {
   }
   return NULL;
 }
+
+StockMarket::~StockMarket() {
+  for(Account* account : accounts) {
+    delete account;
+  }
+  accounts.clear();
+
+  for(Stock* stock : stocks) {
+    delete stock;
+  }
+  stocks.clear();
+}

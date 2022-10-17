@@ -12,5 +12,6 @@ class MarketOrder : public Order {
   bool match(Order*);
   double bidPrice();
   bool isMarketOrder();
+  ~MarketOrder();
 };
 #endif

@@ -20,5 +20,6 @@ class Trader : public Member {
                       std::string orderType);
   StockPortfolio* getStockPortfolio(Stock*);
   void displayWatchlist();
+  ~Trader();
 };
 #endif

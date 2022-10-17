@@ -84,3 +84,10 @@ void StockPortfolio::refresh() {
   gain = stock->getPrice() * quantity - totalPaid;
 }
 
+StockPortfolio::~StockPortfolio() {
+  delete stock;
+  for(Order* order : orders) {
+    delete order;
+  }
+  orders.clear();
+}

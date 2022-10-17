@@ -14,5 +14,6 @@ class LimitOrder : public Order{
   LimitOrder(Stock*, double, int, bool);
   bool match(Order*);
   double bidPrice();
+  ~LimitOrder();
 };
 #endif

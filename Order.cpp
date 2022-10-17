@@ -8,45 +8,25 @@ Order::Order(Stock* stock, double price, int quantity, bool isBuyOrder) {
   this->status = "pending";
 }
 
-bool Order::match(Order* order) {
-  return true;
-}
+bool Order::match(Order* order) { return true; }
 
-double Order::bidPrice() {
-  return 0;
-}
+double Order::bidPrice() { return 0; }
 
-void Order::cancel() {
-  status = "cancelled";
-}
+void Order::cancel() { status = "cancelled"; }
 
-bool Order::isFilled() {
-  return status == "filled";
-}
+bool Order::isFilled() { return status == "filled"; }
 
-bool Order::getIsBuyOrder() {
-  return isBuyOrder;
-}
+bool Order::getIsBuyOrder() { return isBuyOrder; }
 
-bool Order::isMarketOrder() {
-  return false;
-}
+bool Order::isMarketOrder() { return false; }
 
-int Order::getQuantity() {
-  return quantity;
-}
+int Order::getQuantity() { return quantity; }
 
-int Order::getFilledQuantity() {
-  return filledQuantity;
-}
+int Order::getFilledQuantity() { return filledQuantity; }
 
-int Order::getUnfilledQuantity() {
-  return quantity - filledQuantity;
-}
+int Order::getUnfilledQuantity() { return quantity - filledQuantity; }
 
-std::string Order::getStatus() {
-  return status;
-}
+std::string Order::getStatus() { return status; }
 
 void Order::addTransaction(Transaction transaction) {
   filledQuantity += transaction.getQuantity();
@@ -58,6 +38,6 @@ void Order::addTransaction(Transaction transaction) {
   transactions.push_back(transaction);
 }
 
-std::vector<Transaction> Order::getTransactions() {
-  return transactions;
-}
+std::vector<Transaction> Order::getTransactions() { return transactions; }
+
+Order::~Order() {}

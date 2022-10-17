@@ -1,7 +1,9 @@
-#include <iostream>
 #include "Member.h"
 
-Member::Member(std::string password, std::string name, std::string phone, std::string email, std::string status, std::string type) {
+#include <iostream>
+
+Member::Member(std::string password, std::string name, std::string phone,
+               std::string email, std::string status, std::string type) {
   this->password = password;
   this->name = name;
   this->phone = phone;
@@ -11,21 +13,17 @@ Member::Member(std::string password, std::string name, std::string phone, std::s
   watchlist = Watchlist(name + "'s watchlist");
 }
 
-Watchlist Member::getWatchlist() {
-  return watchlist;
-}
+Watchlist Member::getWatchlist() { return watchlist; }
 
-void Member::addStock(Stock* stock) {
-  watchlist.addStock(stock);
-}
+void Member::addStock(Stock* stock) { watchlist.addStock(stock); }
 
-void Member::removeStock(Stock* stock) {
-  watchlist.removeStock(stock);
-}
+void Member::removeStock(Stock* stock) { watchlist.removeStock(stock); }
 
 void Member::displayWatchlist() {
   std::cout << name << "'s watchlist" << std::endl;
-  for(Stock* stock : watchlist.getStocks()) {
+  for (Stock* stock : watchlist.getStocks()) {
     stock->display();
   }
 }
+
+Member::~Member() {}

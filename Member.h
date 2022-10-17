@@ -5,8 +5,8 @@
 #include <vector>
 
 #include "Account.h"
-#include "Watchlist.h"
 #include "StockPortfolio.h"
+#include "Watchlist.h"
 
 class Member : public Account {
  protected:
@@ -14,15 +14,20 @@ class Member : public Account {
 
  public:
   Member(std::string password, std::string name, std::string phone,
-          std::string email, std::string status, std::string type);
+         std::string email, std::string status, std::string type);
   Watchlist getWatchlist();
   void addStock(Stock*);
   void removeStock(Stock*);
   void displayWatchlist();
   StockPortfolio* buy(Stock* stock, int quantity, double price,
-                     std::string orderType) {return NULL;};
+                      std::string orderType) {
+    return NULL;
+  };
   StockPortfolio* sell(Stock* stock, int quantity, double price,
-                      std::string orderType) {return NULL;};
+                       std::string orderType) {
+    return NULL;
+  };
+  ~Member();
 };
 
 #endif

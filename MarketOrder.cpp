@@ -93,3 +93,5 @@ double MarketOrder::bidPrice() {
 bool MarketOrder::isMarketOrder() {
   return true;
 }
+
+MarketOrder::~MarketOrder() {}

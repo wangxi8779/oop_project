@@ -17,5 +17,6 @@ class StockMarket {
   void updateAccounts();
   Account* login(std::string, std::string);
   Account* findAccount(std::string);
+  ~StockMarket();
 };
 #endif

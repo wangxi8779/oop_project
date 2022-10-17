@@ -14,9 +14,11 @@ class Watchlist {
  public:
   Watchlist(){};
   Watchlist(std::string);
-  void addStock(Stock*);
-  void removeStock(Stock*);
+  void addStock(Stock *);
+  void removeStock(Stock *);
   std::vector<Stock *> getStocks();
+  ~Watchlist();
 };
 
 #endif
+ß\
