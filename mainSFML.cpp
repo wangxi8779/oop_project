@@ -11,6 +11,9 @@ int HEIGHT = 600;
 double balance = 500;
 unsigned int purchaseAmount = 0;
 
+//for switching between stocks
+int stock_int;
+
 int main()
 {
   //loading in font
@@ -83,8 +86,8 @@ int main()
   //Watch list UI
   sf::RectangleShape buy_watch, sell_watch;
 
-  Button buy_list(buy_watch, 120, 190, 224,224,224 );
-  Button sell_list(sell_watch, 120, 190, 224,224,224);
+  Button buy_list(buy_watch, 120, 100, 224,224,224 );
+  Button sell_list(sell_watch, 120, 100, 224,224,224);
 
   buy_list.setPos(10, 400);
   sell_list.setPos(140, 400);
@@ -96,8 +99,8 @@ int main()
   sell_watch.setOutlineColor(sf::Color(0,255,255));
 
   sf::Text b_watch_text, s_watch_text;
-  DisplayText b_watch_display("Buy-orders", b_watch_text, 15);
-  DisplayText s_watch_display("Sell-orders", s_watch_text, 15);
+  DisplayText b_watch_display("Stock\nApple\nTesla\nAmazon\nGoogle\nMeta", b_watch_text, 15);
+  DisplayText s_watch_display("# of stock", s_watch_text, 15);
 
   b_watch_display.setPos(10,400);
   s_watch_display.setPos(140,400);
@@ -174,6 +177,28 @@ int main()
   DisplayText balance_t(std::to_string(balance), balance_text, 20);
   balance_t.setPos(840, 440);
   (balance_t.textObj).setFont(font);
+
+  // stock text display
+  sf::Text google, amazon, meta, tesla, apple;
+  DisplayText google_t("Google", google, 40);
+  DisplayText amazon_t("Amazon", amazon, 40);
+  DisplayText meta_t("Meta", meta, 40);
+  DisplayText apple_t("Apple", apple, 40);
+  DisplayText tesla_t("Tesla", tesla, 40);
+  
+  google_t.setPos(290,30);
+  amazon_t.setPos(290,30);
+  meta_t.setPos(290,30);
+  apple_t.setPos(290,30);
+  tesla_t.setPos(290,30);
+
+  google_t.textObj.setFont(font);
+  amazon_t.textObj.setFont(font);
+  meta_t.textObj.setFont(font);
+  apple_t.textObj.setFont(font);
+  tesla_t.textObj.setFont(font);
+
+  
 
   
   // + and - buttons for buy/sell & buyOrder/sellOrder & purchaseAmount
@@ -257,7 +282,7 @@ int main()
 		  balance_t.change_text(std::to_string(balance));
 		  std :: cout << balance << std :: endl;
 		}
-
+	      
 	      // sell button
 	      if (event.mouseButton.button == sf::Mouse::Left && event.mouseButton.x >= 140
 		  && event.mouseButton.x <= 260 && event.mouseButton.y >= 10 && event.mouseButton.y <= 70)
@@ -268,19 +293,19 @@ int main()
 		}
 
 	      // buy order button
-	      if (event.mouseButton.button == sf::Mouse::Left && event.mouseButton.x >= 10
-		  && event.mouseButton.x <= 130 && event.mouseButton.y >= 90 && event.mouseButton.y <= 150)
-		{
-		  std :: cout << " Buy Order set: need popup" << std :: endl;
-		}
+	      // if (event.mouseButton.button == sf::Mouse::Left && event.mouseButton.x >= 10
+	      // 	  && event.mouseButton.x <= 130 && event.mouseButton.y >= 90 && event.mouseButton.y <= 150)
+	      // 	{
+	      // 	  std :: cout << " Buy Order set: need popup" << std :: endl;
+	      // 	}
 
-	      // sell order button
-	      if (event.mouseButton.button == sf::Mouse::Left && event.mouseButton.x >= 140
-		  && event.mouseButton.x <= 260 && event.mouseButton.y >= 90 && event.mouseButton.y <= 150)
-		{
-		  std :: cout << "Sell Order set: needs popup" << std :: endl;
-		}
-
+	      // // sell order button
+	      // if (event.mouseButton.button == sf::Mouse::Left && event.mouseButton.x >= 140
+	      // 	  && event.mouseButton.x <= 260 && event.mouseButton.y >= 90 && event.mouseButton.y <= 150)
+	      // 	{
+	      // 	  std :: cout << "Sell Order set: needs popup" << std :: endl;
+	      // 	}
+	      
 	      // change user button
 	      if (event.mouseButton.button == sf::Mouse::Left && event.mouseButton.x >= 10
 		  && event.mouseButton.x <= 130 && event.mouseButton.y >= 170 && event.mouseButton.y <= 230)
@@ -320,7 +345,48 @@ int main()
 		{
 		  if (purchaseAmount > 0){purchaseAmount--;}
 		  arrowAmount.change_text(std::to_string(purchaseAmount));
-		}   
+		}
+
+	      //google
+	      if (event.mouseButton.button == sf::Mouse::Left && event.mouseButton.x >= 270
+		  && event.mouseButton.x <= 380 && event.mouseButton.y >= 440 && event.mouseButton.y <= 550)
+		{
+		  stock_int=1;
+		  std::cout<<"google"<<std::endl;
+		}
+
+	      //amazon
+	      if (event.mouseButton.button == sf::Mouse::Left && event.mouseButton.x >= 380
+		  && event.mouseButton.x <= 490 && event.mouseButton.y >= 440 && event.mouseButton.y <= 550)
+		{
+		  stock_int=2;
+		  std::cout<<"amazon"<<std::endl;
+		}
+
+	      //meta
+	      if (event.mouseButton.button == sf::Mouse::Left && event.mouseButton.x >= 490
+		  && event.mouseButton.x <= 600 && event.mouseButton.y >= 440 && event.mouseButton.y <= 550)
+		{
+		  stock_int=3;
+		  std::cout<<"meta"<<std::endl;
+		}
+	      
+	      //appple
+	      if (event.mouseButton.button == sf::Mouse::Left && event.mouseButton.x >= 600
+		  && event.mouseButton.x <= 710 && event.mouseButton.y >= 440 && event.mouseButton.y <= 550)
+		{
+		  stock_int=4;
+		  std::cout<<"apple"<<std::endl;
+		}
+
+	      //telsa
+	      if (event.mouseButton.button == sf::Mouse::Left && event.mouseButton.x >= 710
+		  && event.mouseButton.x <= 820 && event.mouseButton.y >= 440 && event.mouseButton.y <= 550)
+		{
+		  stock_int=5;
+		  std::cout<<"tesla"<<std::endl;
+		}
+	      
 	    }
 	  
   
@@ -330,8 +396,8 @@ int main()
         window.clear(sf::Color(15,5,30));
 	window.draw(b1.recB);
 	window.draw(b2.recB);
-	window.draw(b3.recB);
-	window.draw(b4.recB);
+	//window.draw(b3.recB);
+	//window.draw(b4.recB);
 	window.draw(b5.recB);
 	window.draw(b6.recB);
 	window.draw(b7.recB);
@@ -352,8 +418,8 @@ int main()
 	window.draw(text);
 	window.draw(buy_t.textObj);
 	window.draw(sell_t.textObj);
-	window.draw(buyOrder_t.textObj);
-	window.draw(sellOrder_t.textObj);
+	//window.draw(buyOrder_t.textObj);
+	//window.draw(sellOrder_t.textObj);
 	window.draw(usr_t.textObj);
 	window.draw(add_bank_t.textObj);
 	window.draw(balance_t.textObj);
@@ -363,6 +429,28 @@ int main()
 	window.draw(b_watch_display.textObj);
 	window.draw(s_watch_display.textObj);
 	window.draw(user_text.textObj);
+
+	switch(stock_int)
+	{
+	case(1):
+	  window.draw(google_t.textObj);
+	  break;
+	case(2):
+	  window.draw(amazon_t.textObj);
+	  break;
+	case(3):
+	  window.draw(meta_t.textObj);
+	  break;
+	case(4):
+	  window.draw(apple_t.textObj);
+	  break;
+	case(5):
+	  window.draw(tesla_t.textObj);
+	  break;
+	default:
+	  break;
+	}
+
 	
 	// text input
 	//window.draw(log_button.recB);
