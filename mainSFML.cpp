@@ -15,7 +15,7 @@ int main()
 {
 
   sf::Color Grey(54,69,79);
-  
+
   sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Stock Trader");
   //window.setFillColor(sf::Color(0,0,102));
 
@@ -85,7 +85,7 @@ int main()
       std::cout<<"ERROR loading font"<<std::endl;
       return 0;
     }
-    
+
   // testing with sf::Text class
   sf::Text text;
   text.setFont(font);
@@ -96,7 +96,7 @@ int main()
 
   //Button Texts
   sf::Text buy_text, sell_text, buy_order, sell_order, change_usr, add_bank, balance_text, plus, minus, purchaseAmount_text;
-  
+
   DisplayText buy_t("Buy", buy_text, 20);
   buy_t.setPos(50, 25);
   (buy_t.textObj).setFont(font);
@@ -129,15 +129,15 @@ int main()
   // + and - buttons for buy/sell & buyOrder/sellOrder & purchaseAmount
   sf::CircleShape trianglePlus(30,3);
   sf::CircleShape triangleMinus(30,3);
-  
+
   sf::RectangleShape r_purchaseAmount;
   Button b_purchaseAmount(r_purchaseAmount, 50,30,224,224,224);
   b_purchaseAmount.setPos(110,302);
-  
+
   triangleMinus.rotate(180);
   triangleMinus.setPosition(165,385);
   trianglePlus.setPosition(105,250);
-  
+
   DisplayText plus_t("+", plus, 40);
   plus_t.setPos(125, 250);
   (plus_t.textObj).setFont(font);
@@ -149,7 +149,7 @@ int main()
   DisplayText arrowAmount(std::to_string(purchaseAmount), purchaseAmount_text, 30);
   arrowAmount.setPos(120,298);
   (arrowAmount.textObj).setFont(font);
-  
+
   // main loop
   while (window.isOpen())
     {
@@ -160,7 +160,7 @@ int main()
 	  // exit applet
 	  if (event.type == sf::Event::Closed)
 	    window.close();
-	  
+
 	  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 	    {
 	      std::cout<<"Closing window..."<<std::endl;
@@ -228,7 +228,7 @@ int main()
 		      break;
 		    }
 		}
-	      
+
 	      // plus and minus arrow buttons
 	      if (event.mouseButton.button == sf::Mouse::Left && event.mouseButton.x >= 105
 		  && event.mouseButton.x <= 170 && event.mouseButton.y >= 250 && event.mouseButton.y <= 295)
@@ -246,15 +246,6 @@ int main()
 	    }
 	} // end events
 
-      
-	// while(window.pollEvent(event))
-	//   {
-	//     if(event.type == sf::Event::KeyPressed)
-	//       {
-	// 	std::cout<<"b1 Pressed" << std::endl;
-	//       }
-	//   }
-	
 
 	// Drawing GUI and updates
         window.clear(sf::Color(15,5,30));
@@ -274,7 +265,7 @@ int main()
 	window.draw(line_b2.recB);
 	window.draw(line_b3.recB);
 	window.draw(line_b4.recB);
-	
+
 	window.draw(text);
 	window.draw(buy_t.textObj);
 	window.draw(sell_t.textObj);
