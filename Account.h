@@ -35,6 +35,7 @@ class Account {
                       std::string orderType) {return NULL;};
   double deposit(double);
   double withdraw(double);
+  double getBalance();
   ~Account();
 };
 #endif

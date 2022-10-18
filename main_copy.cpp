@@ -20,6 +20,7 @@ int main() {
   s1->insertOrder(new LimitOrder(s1, 105, 5, false));
   s1->insertOrder(new LimitOrder(s1, 108, 5, false));
   s1->insertOrder(new LimitOrder(s1, 120, 12, false));
+
   Stock* s2 = new Stock("Apple", 90);
   s2->insertOrder(new LimitOrder(s2, 70, 10, true));
   s2->insertOrder(new LimitOrder(s2, 80, 10, true));
@@ -27,16 +28,38 @@ int main() {
   s2->insertOrder(new LimitOrder(s2, 105, 5, false));
   s2->insertOrder(new LimitOrder(s2, 108, 5, false));
   s2->insertOrder(new LimitOrder(s2, 120, 12, false));
+
   Stock* s3 = new Stock("Google", 1000.3);
+  s3->insertOrder(new LimitOrder(s3, 70, 10, true));
+  s3->insertOrder(new LimitOrder(s3, 80, 10, true));
+  //queue sell orders
+  s3->insertOrder(new LimitOrder(s3, 105, 5, false));
+  s3->insertOrder(new LimitOrder(s3, 108, 5, false));
+  s3->insertOrder(new LimitOrder(s3, 120, 12, false));
+
   Stock* s4 = new Stock("Amazon", 133);
+  s4->insertOrder(new LimitOrder(s4, 70, 10, true));
+  s4->insertOrder(new LimitOrder(s4, 80, 10, true));
+  //queue sell orders
+  s4->insertOrder(new LimitOrder(s4, 105, 5, false));
+  s4->insertOrder(new LimitOrder(s4, 108, 5, false));
+  s4->insertOrder(new LimitOrder(s4, 120, 12, false));
+
   Stock* s5 = new Stock("Meta", 122);
+  s5->insertOrder(new LimitOrder(s5, 70, 10, true));
+  s5->insertOrder(new LimitOrder(s5, 80, 10, true));
+  //queue sell orders
+  s5->insertOrder(new LimitOrder(s5, 105, 5, false));
+  s5->insertOrder(new LimitOrder(s5, 108, 5, false));
+  s5->insertOrder(new LimitOrder(s5, 120, 12, false));
+
   vector<Stock*> stocks = {s1, s2, s3, s4, s5};
   StockMarket stockMarket = StockMarket(stocks);
 
   // Login
   // Account* currentUser = NULL;
   Account* currentUser = stockMarket.findAccount("e"); //skip login for test
-  while (!currentUser) {
+ /* while (!currentUser) {
     string email;
     string password;
     cout << "please input email" << endl;
@@ -44,7 +67,7 @@ int main() {
     cout << "please input password" << endl;
     cin >> password;
     currentUser = stockMarket.login(email, password);
-  }
+  }*/
 
   // Login as admin
   if(currentUser->getType() == "admin") {
@@ -104,7 +127,7 @@ int main() {
   //main loop
   while(run)
   {
-    int input, input2;
+    int input=0, input2=0;
     cout << "1:Buy|||2:Sell|||3:Logout|||4:Login|||5:bank\n6:Deposit|||7:get watchlist|||"<<endl;
     cin >> input;
     // int input, input2;
@@ -116,12 +139,59 @@ int main() {
       cout << "How much would you like to buy?" << endl;
       cin >> input2;
 
-      if(input == 2)
-      { currentUser ->deposit(1000000000);
-        currentUser -> addStock(s2);
-        currentUser -> buy(s2,5,120,"limit");
-        currentUser ->displayWatchlist();
+    if(input == 1)
+      { //currentUser ->deposit(1000000000);
+        currentUser -> removeStock(s1);
+        currentUser -> addStock(s1);
+        currentUser -> buy(s1,input2,s1->getPrice(),"limit");
+        currentUser -> withdraw(input2 * (s1->getPrice()));
+        input = 0;
+        input2 = 0;
+        //currentUser ->displayWatchlist();
       }
+
+      if(input == 2)
+      { //currentUser ->deposit(1000000000);
+        currentUser -> removeStock(s2);
+        currentUser -> addStock(s2);
+        currentUser -> buy(s2,input2,s2->getPrice(),"limit");
+        currentUser -> withdraw(input2 * (s2->getPrice()));
+        input = 0;
+        input2 = 0;
+        //currentUser ->displayWatchlist();
+      }
+
+      if(input == 3)
+      {
+        currentUser -> removeStock(s4);
+        currentUser -> addStock(s4);
+        currentUser -> buy(s4, input2, s3->getPrice(), "limit");
+        currentUser -> withdraw(input2 * (s3->getPrice()));
+        input = 0;
+        input2 = 0;
+      }
+
+       if(input == 4)
+      {
+        currentUser -> removeStock(s4);
+        currentUser -> addStock(s4);
+        currentUser -> buy(s4, input2, s4->getPrice(), "limit");
+        currentUser -> withdraw(input2 * (s4->getPrice()));
+        input = 0;
+        input2 = 0;
+      }
+
+
+       if(input == 5)
+      {
+        currentUser -> removeStock(s5);
+        currentUser -> addStock(s5);
+        currentUser -> buy(s5, input2, s5->getPrice(), "limit");
+        currentUser -> withdraw(input2 * (s5->getPrice()));
+        input = 0;
+        input2 = 0;
+      }
+
     }
 
     if(input ==2)
@@ -133,12 +203,82 @@ int main() {
 
       if(input==1)
       {
-        currentUser -> removeStock(s1);
+        //currentUser -> removeStock(s1);
         currentUser -> sell(s1,input2,s1->getPrice(), "");
-
+        currentUser -> deposit(input2 * (s1->getPrice()));
+        input = 0;
+        input2 = 0;
       }
 
+      if(input==2)
+      {
+        //currentUser -> removeStock(s1);
+        currentUser -> sell(s2,input2,s2->getPrice(), "");
+        currentUser -> deposit(input2 * (s2->getPrice()));
+        input = 0;
+        input2 = 0;
+      }
+
+      if(input==3)
+      {
+        //currentUser -> removeStock(s1);
+        currentUser -> sell(s3,input2,s3->getPrice(), "");
+        currentUser -> deposit(input2 * (s3->getPrice()));
+        input = 0;
+        input2 = 0;
+      }
+
+      if(input==4)
+      {
+        //currentUser -> removeStock(s1);
+        currentUser -> sell(s4,input2,s4->getPrice(), "");
+        currentUser -> deposit(input2 * (s4->getPrice()));
+        input = 0;
+        input2 = 0;
+      }
+
+      if(input==5)
+      {
+        //currentUser -> removeStock(s1);
+        currentUser -> sell(s5,input2,s5->getPrice(), "");
+        currentUser -> deposit(input2 * (s5->getPrice()));
+        input = 0;
+        input2 = 0;
+      }
 
     }
+
+     if(input==3)
+    {
+      run == false;
+      cout <<"Bye"<<endl;
+      break;
+    }
+
+
+    if(input == 4)
+    {
+      cout << "Please enter email" << endl;
+      cin >> email;
+      cout<<"Please enter password: "<<endl;
+      cin>>password;
+      currentUser = stockMarket.login(email,password);
+    }
+
+    if(input==6)
+    {
+      currentUser->deposit(1000);
+    }
+
+    if(input==5)
+    {
+     cout<<"Balance: "<< currentUser->getBalance() << endl;
+    }
+
+    if(input ==7)
+    {
+      currentUser->displayWatchlist();
+    }
+
   }
 }

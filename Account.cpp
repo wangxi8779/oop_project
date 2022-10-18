@@ -67,4 +67,9 @@ double Account::withdraw(double amount)
   return balance;
 }
 
+double Account::getBalance()
+{
+  return balance;
+}
+
 Account::~Account() {}
