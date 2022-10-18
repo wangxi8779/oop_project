@@ -13,9 +13,16 @@ unsigned int purchaseAmount = 0;
 
 int main()
 {
+  //loading in font
+  sf::Font font;
+  if (!font.loadFromFile("secrcode.ttf"))
+    {
+      std::cout<<"ERROR loading font"<<std::endl;
+      return 0;
+    }
 
   sf::Color Grey(54,69,79);
-
+  
   sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Stock Trader");
   //window.setFillColor(sf::Color(0,0,102));
 
@@ -59,8 +66,50 @@ int main()
   Button b8(_bank, 150, 65, 170, 170, 170);
   b8.setPos(840,440);
 
+
+  //current user UI
+  sf::RectangleShape current_user;
+  Button current_user_b(current_user, 450, 20, 224,224,224);
+  current_user_b.setPos(270, 560);
+
+  sf::Text current_user_text;
+  DisplayText user_text("User: ", current_user_text, 15);
+  user_text.setPos(270,560);
+  user_text.textObj.setFont(font);
+  
+  user_text.textObj.setStyle(sf::Text::Bold);
+
+  
+  //Watch list UI
+  sf::RectangleShape buy_watch, sell_watch;
+
+  Button buy_list(buy_watch, 120, 190, 224,224,224 );
+  Button sell_list(sell_watch, 120, 190, 224,224,224);
+
+  buy_list.setPos(10, 400);
+  sell_list.setPos(140, 400);
+
+  buy_watch.setOutlineThickness(3);
+  sell_watch.setOutlineThickness(3);
+
+  buy_watch.setOutlineColor(sf::Color(0,255,255));
+  sell_watch.setOutlineColor(sf::Color(0,255,255));
+
+  sf::Text b_watch_text, s_watch_text;
+  DisplayText b_watch_display("Buy-orders", b_watch_text, 15);
+  DisplayText s_watch_display("Sell-orders", s_watch_text, 15);
+
+  b_watch_display.setPos(10,400);
+  s_watch_display.setPos(140,400);
+
+  b_watch_display.textObj.setFont(font);
+  s_watch_display.textObj.setFont(font);
+
+  b_watch_display.textObj.setStyle(sf::Text::Bold);
+  s_watch_display.textObj.setStyle(sf::Text::Bold);
+  
   // vertical lines to seperate stock options in price_overview
-  sf::RectangleShape line1, line2, line3, line4;
+  sf::RectangleShape line1, line2, line3, line4, watch_line;
   Button line_b1(line1, 100, 3, 255,255,255);
   line_b1.setPos(380,440);
   line_b1.recB.rotate(90);
@@ -77,15 +126,17 @@ int main()
   line_b4.setPos(710,440);
   line_b4.recB.rotate(90);
 
+  // importing company logos
+  //sf::Image tesla, apple, google, meta, amazon;
 
-  //loading in font
-  sf::Font font;
-  if (!font.loadFromFile("secrcode.ttf"))
-    {
-      std::cout<<"ERROR loading font"<<std::endl;
-      return 0;
-    }
+  //if(!background.loadFromFile()
+  
 
+  
+  //watch line is line for watch lists
+  Button watch_line_b(watch_line, 250,3, 0,0,0);
+  watch_line_b.setPos(10,415);
+  
   // testing with sf::Text class
   sf::Text text;
   text.setFont(font);
@@ -93,10 +144,9 @@ int main()
   text.setCharacterSize(24);
   text.setFillColor(sf::Color::Red);
 
-
   //Button Texts
   sf::Text buy_text, sell_text, buy_order, sell_order, change_usr, add_bank, balance_text, plus, minus, purchaseAmount_text;
-
+  
   DisplayText buy_t("Buy", buy_text, 20);
   buy_t.setPos(50, 25);
   (buy_t.textObj).setFont(font);
@@ -125,19 +175,19 @@ int main()
   balance_t.setPos(840, 440);
   (balance_t.textObj).setFont(font);
 
-
+  
   // + and - buttons for buy/sell & buyOrder/sellOrder & purchaseAmount
   sf::CircleShape trianglePlus(30,3);
   sf::CircleShape triangleMinus(30,3);
-
+  
   sf::RectangleShape r_purchaseAmount;
   Button b_purchaseAmount(r_purchaseAmount, 50,30,224,224,224);
   b_purchaseAmount.setPos(110,302);
-
+  
   triangleMinus.rotate(180);
   triangleMinus.setPosition(165,385);
   trianglePlus.setPosition(105,250);
-
+  
   DisplayText plus_t("+", plus, 40);
   plus_t.setPos(125, 250);
   (plus_t.textObj).setFont(font);
@@ -150,6 +200,24 @@ int main()
   arrowAmount.setPos(120,298);
   (arrowAmount.textObj).setFont(font);
 
+
+  // testing text input for login/logout etc etc etc
+  sf::RectangleShape log_in_out;
+  Button log_button(log_in_out, 300, 50, 0,0,0);
+  log_button.setPos(350, 500);
+
+  sf::Text logInOut;
+  DisplayText log_text("***Please follow the instructions \n\tin the command terminal***", logInOut, 35);
+
+  log_text.setPos(350,20);
+  log_text.setColor(255,255,255);
+
+  log_text.textObj.setOutlineColor(sf::Color(0,0,0));
+  log_text.textObj.setOutlineThickness(5);
+
+  (log_text.textObj).setFont(font);
+		       
+  
   // main loop
   while (window.isOpen())
     {
@@ -160,7 +228,7 @@ int main()
 	  // exit applet
 	  if (event.type == sf::Event::Closed)
 	    window.close();
-
+	  
 	  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 	    {
 	      std::cout<<"Closing window..."<<std::endl;
@@ -217,8 +285,18 @@ int main()
 	      if (event.mouseButton.button == sf::Mouse::Left && event.mouseButton.x >= 10
 		  && event.mouseButton.x <= 130 && event.mouseButton.y >= 170 && event.mouseButton.y <= 230)
 		{
+
 		  if(usr_t.return_text() == "Login")
 		    {
+		      window.draw(log_text.textObj);
+		      window.display();
+		      std::string usr, pass; // only for testing
+		      std :: cout << "Please enter your account name: " << std :: endl;
+		      std :: cin >> usr;
+		      std :: cout << "Please enter your password: " << std :: endl;
+		      std :: cin >> pass;
+
+		      std:: cout << "Usr: " << usr << " ... Pass: " << pass << std :: endl;
 		      usr_t.change_text("Logout");
 		      break;
 		    }
@@ -228,7 +306,7 @@ int main()
 		      break;
 		    }
 		}
-
+	      
 	      // plus and minus arrow buttons
 	      if (event.mouseButton.button == sf::Mouse::Left && event.mouseButton.x >= 105
 		  && event.mouseButton.x <= 170 && event.mouseButton.y >= 250 && event.mouseButton.y <= 295)
@@ -242,10 +320,11 @@ int main()
 		{
 		  if (purchaseAmount > 0){purchaseAmount--;}
 		  arrowAmount.change_text(std::to_string(purchaseAmount));
-		}
+		}   
 	    }
+	  
+  
 	} // end events
-
 
 	// Drawing GUI and updates
         window.clear(sf::Color(15,5,30));
@@ -265,7 +344,11 @@ int main()
 	window.draw(line_b2.recB);
 	window.draw(line_b3.recB);
 	window.draw(line_b4.recB);
-
+	window.draw(buy_list.recB);
+	window.draw(sell_list.recB);
+	window.draw(watch_line_b.recB);
+	window.draw(current_user_b.recB);
+	
 	window.draw(text);
 	window.draw(buy_t.textObj);
 	window.draw(sell_t.textObj);
@@ -277,8 +360,16 @@ int main()
 	window.draw(plus_t.textObj);
 	window.draw(minus_t.textObj);
 	window.draw(arrowAmount.textObj);
-
+	window.draw(b_watch_display.textObj);
+	window.draw(s_watch_display.textObj);
+	window.draw(user_text.textObj);
+	
+	// text input
+	//window.draw(log_button.recB);
+	
+	
 	window.display();
     }
-    return 0;
+
+  return 0;
 }
