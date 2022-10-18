@@ -21,6 +21,12 @@ int main() {
   s1->insertOrder(new LimitOrder(s1, 108, 5, false));
   s1->insertOrder(new LimitOrder(s1, 120, 12, false));
   Stock* s2 = new Stock("Apple", 90);
+  s2->insertOrder(new LimitOrder(s2, 70, 10, true));
+  s2->insertOrder(new LimitOrder(s2, 80, 10, true));
+  //queue sell orders
+  s2->insertOrder(new LimitOrder(s2, 105, 5, false));
+  s2->insertOrder(new LimitOrder(s2, 108, 5, false));
+  s2->insertOrder(new LimitOrder(s2, 120, 12, false));
   Stock* s3 = new Stock("Google", 1000.3);
   Stock* s4 = new Stock("Amazon", 133);
   Stock* s5 = new Stock("Meta", 122);
@@ -28,9 +34,9 @@ int main() {
   StockMarket stockMarket = StockMarket(stocks);
 
   // Login
-  Account* currentUser = NULL;
-  // Account* currentUser = stockMarket.findAccount("e"); //skip login for test
-  /*while (!currentUser) {
+  // Account* currentUser = NULL;
+  Account* currentUser = stockMarket.findAccount("e"); //skip login for test
+  while (!currentUser) {
     string email;
     string password;
     cout << "please input email" << endl;
@@ -38,61 +44,9 @@ int main() {
     cout << "please input password" << endl;
     cin >> password;
     currentUser = stockMarket.login(email, password);
-  }*/
-
-  bool run=true;
-  int input, input2;
-  string email;
-  string password;
-
-
-  //main loop
-  while(run)
-  {
-    int input, input2;
-    cout << "1:Buy|||2:Sell|||3:Logout|||4:Login|||5:bank\n6:Deposit|||7:get watchlist|||"<<endl;
-    cin >> input;
-    // int input, input2;
-
-    if(input == 1)
-    {
-      cout << "Which stock would you like to buy?1:tesla, 2:apple, 3:google, 4:amazon, 5:meta" << endl;
-      cin >> input;
-      cout << "How much would you like to buy?" << endl;
-      cin >> input2;
-
-      if(input == 2)
-      {
-        currentUser -> addStock(s2);
-        currentUser -> buy(s2,input2,120,"limit");
-      }
-    }
-
-    if(input ==2)
-    {
-      cout << "which stock would you like to sell:1:tesla, 2:apple, 3:google, 4:amazon, 5:meta"<<endl;
-      cin>>input;
-      cout << "how much would you like to sell:"<<endl;
-      cin>>input2;
-
-      if(input==1)
-      {
-        currentUser -> removeStock(s1);
-        currentUser -> sell(s1,input2,s1->getPrice(), "");
-
-      }
-
-
-    }
   }
-}
 
-
-     
-
-
-
-/*  // Login as admin
+  // Login as admin
   if(currentUser->getType() == "admin") {
     while(true) {
       int action = 0;
@@ -141,35 +95,50 @@ int main() {
     currentUser->addStock(s2);
     currentUser->displayWatchlist();
   }
-
-  // Login as trader
-  else if(currentUser->getType() == "trader") {
-    currentUser->addStock(s1);
-    currentUser -> deposit(100000);
-    currentUser-> buy(s1, 10, 105, "limit");
-    currentUser -> displayWatchlist();
-      //currentUser -> sell(s4,1,105,"limit");
-      //currentUser -> displayWatchlist();
-    //currentUser->buy(s2, 5, 105, "limit");
-    //currentUser->deposit(1000000000);
-    //currentUser->buy(s2, 8, 108, "limit");
-    currentUser->buy(s2, 10, 118, "limit");
-    currentUser->displayWatchlist();
-    currentUser->sell(s3, 2, 117, "limit");
-    currentUser->displayWatchlist();
-
-    currentUser->buy(s1, 2, 0, "market");
-    currentUser->displayWatschlist();
-    currentUser->sell(s1, 2, 0, "market");
-    currentUser->displayWatchlist();*/
-//  }
+ bool run=true;
+  int input, input2;
+  string email;
+  string password;
 
 
-  // int x;
-  // cout << "BUYING A STOCK" << endl;
-  // cin >> x;
-  // currentUser -> displayWatchlist();
-  // if (x == 1)
-  //   currentUser -> buy(s2,10,0,"market0");
+  //main loop
+  while(run)
+  {
+    int input, input2;
+    cout << "1:Buy|||2:Sell|||3:Logout|||4:Login|||5:bank\n6:Deposit|||7:get watchlist|||"<<endl;
+    cin >> input;
+    // int input, input2;
 
-  // currentUser -> displayWatchlist();
+    if(input == 1)
+    {
+      cout << "Which stock would you like to buy?1:tesla, 2:apple, 3:google, 4:amazon, 5:meta" << endl;
+      cin >> input;
+      cout << "How much would you like to buy?" << endl;
+      cin >> input2;
+
+      if(input == 2)
+      { currentUser ->deposit(1000000000);
+        currentUser -> addStock(s2);
+        currentUser -> buy(s2,5,120,"limit");
+        currentUser ->displayWatchlist();
+      }
+    }
+
+    if(input ==2)
+    {
+      cout << "which stock would you like to sell:1:tesla, 2:apple, 3:google, 4:amazon, 5:meta"<<endl;
+      cin>>input;
+      cout << "how much would you like to sell:"<<endl;
+      cin>>input2;
+
+      if(input==1)
+      {
+        currentUser -> removeStock(s1);
+        currentUser -> sell(s1,input2,s1->getPrice(), "");
+
+      }
+
+
+    }
+  }
+}

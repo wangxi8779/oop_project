@@ -21,6 +21,12 @@ int main() {
   s1->insertOrder(new LimitOrder(s1, 108, 5, false));
   s1->insertOrder(new LimitOrder(s1, 120, 12, false));
   Stock* s2 = new Stock("Apple", 90);
+  s2->insertOrder(new LimitOrder(s2, 70, 10, true));
+  s2->insertOrder(new LimitOrder(s2, 80, 10, true));
+  //queue sell orders
+  s2->insertOrder(new LimitOrder(s2, 105, 5, false));
+  s2->insertOrder(new LimitOrder(s2, 108, 5, false));
+  s2->insertOrder(new LimitOrder(s2, 120, 12, false));
   Stock* s3 = new Stock("Google", 1000.3);
   Stock* s4 = new Stock("Amazon", 133);
   Stock* s5 = new Stock("Meta", 122);
@@ -28,8 +34,8 @@ int main() {
   StockMarket stockMarket = StockMarket(stocks);
 
   // Login
-  Account* currentUser = NULL;
-  // Account* currentUser = stockMarket.findAccount("e"); //skip login for test
+  // Account* currentUser = NULL;
+  Account* currentUser = stockMarket.findAccount("e"); //skip login for test
   while (!currentUser) {
     string email;
     string password;
@@ -93,7 +99,7 @@ int main() {
   // Login as trader
   else if(currentUser->getType() == "trader") {
     currentUser->addStock(s1);
-    // currentUser->addStock(s2);
+    currentUser->addStock(s2);
     // currentUser->addStock(s3);
     // currentUser->addStock(s4);
     // currentUser->addStock(s5);
@@ -103,12 +109,19 @@ int main() {
     currentUser->buy(s1, 8, 108, "limit");
     currentUser->buy(s1, 10, 118, "limit");
     currentUser->displayWatchlist();
-    currentUser->sell(s1, 2, 117, "limit");
-    currentUser->displayWatchlist();
+//     currentUser->sell(s1, 2, 117, "limit");
+//     currentUser->displayWatchlist();
 
-    currentUser->buy(s1, 2, 0, "market");
-    currentUser->displayWatchlist();
-    currentUser->sell(s1, 2, 0, "market");
-    currentUser->displayWatchlist();
+//     currentUser->buy(s1, 2, 0, "market");
+//     currentUser->displayWatchlist();
+//     currentUser->sell(s1, 2, 0, "market");
+//     currentUser->displayWatchlist();
+
+//     // buy stock Apple
+//     currentUser->buy(s2, 6, 0, "market");
+//     currentUser->displayWatchlist();
+//     currentUser->sell(s2, 10, 0, "market");
+//   }
+// }
   }
 }
