@@ -6,7 +6,12 @@ MarketOrder::MarketOrder(Stock* stock, int quantity, bool isBuyOrder) {
   this->isBuyOrder = isBuyOrder;
   this->status = "pending";
 }
-
+MarketOrder::MarketOrder() {
+  this->stock = NULL;
+  this->quantity = 0;
+  this->isBuyOrder = false;
+  this->status = "";
+}
 bool MarketOrder::match(Order* order)
 {
   int transactionQuantity = 0;
