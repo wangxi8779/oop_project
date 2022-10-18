@@ -64,7 +64,7 @@ int main() {
       if(input == 2)
       {
         currentUser -> addStock(s2);
-        currentUser -> buy(s2,input2,120,"limit");
+        currentUser -> buy(s2,input2,s2->getPrice(),"");
       }
     }
 
@@ -84,11 +84,48 @@ int main() {
 
 
     }
+
+
+    if(input==3)
+    {
+      run == false;
+      cout <<"Bye"<<endl;
+      break;
+    }
+
+    if(input == 4)
+    {
+      cout << "Please enter email" << endl;
+      cin >> email;
+      cout<<"Please enter password: "<<endl;
+      cin>>password;
+      currentUser = stockMarket.login(email,password);
+    }
+
+    if(input == 5)
+    {
+      cout<<currentUser->getBalance()<<endl;
+
+    }
+
+    if(input == 6)
+    {
+     currentUser-> deposit(1000);
+    }
+
+    if(input == 7)
+    {
+      currentUser->displayWatchlist();
+    }
+
   }
+
+
 }
 
 
-     
+
+
 
 
 
@@ -152,14 +189,14 @@ int main() {
       //currentUser -> displayWatchlist();
     //currentUser->buy(s2, 5, 105, "limit");
     //currentUser->deposit(1000000000);
-    //currentUser->buy(s2, 8, 108, "limit");
+    /*currentUser->buy(s2, 8, 108, "limit");
     currentUser->buy(s2, 10, 118, "limit");
     currentUser->displayWatchlist();
     currentUser->sell(s3, 2, 117, "limit");
     currentUser->displayWatchlist();
 
     currentUser->buy(s1, 2, 0, "market");
-    currentUser->displayWatschlist();
+    currentUser->displayWatchlist();
     currentUser->sell(s1, 2, 0, "market");
     currentUser->displayWatchlist();*/
 //  }
@@ -172,4 +209,4 @@ int main() {
   // if (x == 1)
   //   currentUser -> buy(s2,10,0,"market0");
 
-  // currentUser -> displayWatchlist();
+  // currentUser -> displayWatchlist();*/

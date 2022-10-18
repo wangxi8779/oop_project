@@ -12,7 +12,7 @@
 using namespace std;
 
 int main() {
-  Stock* s1 = new Stock("Tesla", 100.5);
+  Stock* s1 = new Stock("Tesla", 120);
   //queue buy orders
   s1->insertOrder(new LimitOrder(s1, 90, 10, true));
   s1->insertOrder(new LimitOrder(s1, 100, 10, true));
@@ -21,7 +21,7 @@ int main() {
   s1->insertOrder(new LimitOrder(s1, 108, 5, false));
   s1->insertOrder(new LimitOrder(s1, 120, 12, false));
 
-  Stock* s2 = new Stock("Apple", 90);
+  Stock* s2 = new Stock("Apple", 120);
   s2->insertOrder(new LimitOrder(s2, 70, 10, true));
   s2->insertOrder(new LimitOrder(s2, 80, 10, true));
   //queue sell orders
@@ -29,7 +29,7 @@ int main() {
   s2->insertOrder(new LimitOrder(s2, 108, 5, false));
   s2->insertOrder(new LimitOrder(s2, 120, 12, false));
 
-  Stock* s3 = new Stock("Google", 1000.3);
+  Stock* s3 = new Stock("Google", 130);
   s3->insertOrder(new LimitOrder(s3, 70, 10, true));
   s3->insertOrder(new LimitOrder(s3, 80, 10, true));
   //queue sell orders
@@ -163,9 +163,9 @@ int main() {
 
       if(input == 3)
       {
-        currentUser -> removeStock(s4);
-        currentUser -> addStock(s4);
-        currentUser -> buy(s4, input2, s3->getPrice(), "limit");
+        currentUser -> removeStock(s3);
+        currentUser -> addStock(s3);
+        currentUser -> buy(s3, input2, s3->getPrice(), "limit");
         currentUser -> withdraw(input2 * (s3->getPrice()));
         input = 0;
         input2 = 0;
