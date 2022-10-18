@@ -229,7 +229,7 @@ int main()
   DisplayText b_watch_display("Stock\nApple\nTesla\nAmazon\nGoogle\nMeta", b_watch_text, 15);
   DisplayText s_watch_display("# of stock", s_watch_text, 15);
 
-  
+
   b_watch_display.setPos(10,400);
   s_watch_display.setPos(140,400);
 
@@ -374,8 +374,8 @@ int main()
   gamat.setColor(255,255,255);
   gamat.textObj.setFont(font);
 
-  
- 
+
+
   // main loop
   while (window.isOpen())
     {
@@ -442,7 +442,7 @@ int main()
 
 		  //balance -= purchaseAmount * 50;
 		  balance_t.change_text(std::to_string(currentUser->getBalance()));
-		  std :: cout << "balance" << std :: endl;
+		  //std :: cout << "balance" << std :: endl;
 		}
 
 	      // sell button
@@ -477,7 +477,7 @@ int main()
 
 		  //balance += purchaseAmount * 1;
 		  balance_t.change_text(std::to_string(currentUser->getBalance()));
-		  std :: cout << "Sell Button clicked" << std :: endl;
+		  //std :: cout << "Sell Button clicked" << std :: endl;
 		}
 
 	      // buy order button
@@ -536,6 +536,7 @@ int main()
 		  arrowAmount.change_text(std::to_string(purchaseAmount));
 		}
 
+				// events to select stock to trade
 	      //google
 	      if (event.mouseButton.button == sf::Mouse::Left && event.mouseButton.x >= 270
 		  && event.mouseButton.x <= 380 && event.mouseButton.y >= 440 && event.mouseButton.y <= 550)
@@ -619,7 +620,8 @@ int main()
 	window.draw(s_watch_display.textObj);
 	window.draw(user_text.textObj);
 	window.draw(gamat.textObj);
-	
+
+	// display selected stock
 	switch(stock_int)
 	{
 	case(1):
@@ -668,9 +670,9 @@ int main()
 	window.draw(mR_b.recB);
 	window.draw(aR2_b.recB);
 	window.draw(tR_b.recB);
-	
+
 	window.display();
-    }
+	}
 
   return 0;
 }
