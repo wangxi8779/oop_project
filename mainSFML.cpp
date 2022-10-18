@@ -15,6 +15,7 @@
 #include <string>
 #include <vector>
 
+using namespace std;
 
 // Screen resolution
 int WIDTH = 1000;
@@ -300,7 +301,7 @@ int main()
   add_bank_t.setPos(143, 185);
   (add_bank_t.textObj).setFont(font);
 
-  DisplayText balance_t(std::to_string(balance), balance_text, 20);
+  DisplayText balance_t("0", balance_text, 20);
   balance_t.setPos(840, 440);
   (balance_t.textObj).setFont(font);
 
@@ -444,7 +445,7 @@ int main()
 			{
 			case(1):
 					currentUser -> sell(s1,purchaseAmount,s1->getPrice(), "");
-      		currentUser -> deposit(purchaseAmountinput2 * (s1->getPrice()));
+      		currentUser -> deposit(purchaseAmount * (s1->getPrice()));
 	  			break;
 			case(2):
 	  			currentUser -> sell(s2,purchaseAmount,s2->getPrice(), "");
@@ -501,7 +502,7 @@ int main()
     			std::cin>>password;
       		currentUser = stockMarket.login(email,password);
 
-		      std:: cout << "Usr: " << usr << " ... Pass: " << pass << std :: endl;
+		      std:: cout << "Usr: " << email << " ... Pass: " << password << std :: endl;
 		      usr_t.change_text("Logout");
 		      break;
 		    }
