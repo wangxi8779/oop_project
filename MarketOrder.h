@@ -9,6 +9,7 @@
 class MarketOrder : public Order {
  public:
   MarketOrder(Stock*, int, bool);
+  MarketOrder();
   bool match(Order*);
   double bidPrice();
   bool isMarketOrder();
