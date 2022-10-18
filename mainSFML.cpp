@@ -229,6 +229,7 @@ int main()
   DisplayText b_watch_display("Stock\nApple\nTesla\nAmazon\nGoogle\nMeta", b_watch_text, 15);
   DisplayText s_watch_display("# of stock", s_watch_text, 15);
 
+  
   b_watch_display.setPos(10,400);
   s_watch_display.setPos(140,400);
 
@@ -367,7 +368,14 @@ int main()
 
   (log_text.textObj).setFont(font);
 
+  sf::Text GAMAT;
+  DisplayText gamat("G   A   M   A   T", GAMAT, 50);
+  gamat.setPos(320,440);
+  gamat.setColor(255,255,255);
+  gamat.textObj.setFont(font);
 
+  
+ 
   // main loop
   while (window.isOpen())
     {
@@ -610,7 +618,8 @@ int main()
 	window.draw(b_watch_display.textObj);
 	window.draw(s_watch_display.textObj);
 	window.draw(user_text.textObj);
-
+	window.draw(gamat.textObj);
+	
 	switch(stock_int)
 	{
 	case(1):
@@ -633,10 +642,33 @@ int main()
 	}
 
 
-	// text input
-	//window.draw(log_button.recB);
+	// drawing graph
+	// need to update y length of boxes
+	sf::RectangleShape gR, aR, mR, aR2, tR;
+	Button gR_b(gR, 140, s1->getPrice(),30,20,225);
+	Button aR_b(aR, 140, s2->getPrice(),30,20,225);
+	Button mR_b(mR, 140, s3->getPrice(),30,20,225);
+	Button aR2_b(aR2, 140,s4->getPrice(),30,20,225);
+	Button tR_b(tR, 140, s5->getPrice(),30,20,225);
 
+	gR_b.recB.rotate(180);
+	aR_b.recB.rotate(180);
+	mR_b.recB.rotate(180);
+	aR2_b.recB.rotate(180);
+	tR_b.recB.rotate(180);
 
+	gR_b.setPos((140+280), 420);
+	aR_b.setPos((2*140+280), 420);
+	mR_b.setPos((3*140+280), 420);
+	aR2_b.setPos((4*140+280), 420);
+	tR_b.setPos((5*140+280), 420);
+
+	window.draw(gR_b.recB);
+	window.draw(aR_b.recB);
+	window.draw(mR_b.recB);
+	window.draw(aR2_b.recB);
+	window.draw(tR_b.recB);
+	
 	window.display();
     }
 
