@@ -1,14 +1,27 @@
 #include <SFML/Graphics.hpp>
 #include "Button.h"
 #include "DisplayText.h"
+
+
+#include "Admin.h"
+#include "Member.h"
+#include "Trader.h"
+#include "Stock.h"
+#include "StockMarket.h"
+#include "LimitOrder.h"
+
 #include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
+
 
 // Screen resolution
 int WIDTH = 1000;
 int HEIGHT = 600;
 
 // for testing
-double balance = 500;
+//double balance = 500;
 unsigned int purchaseAmount = 0;
 
 //for switching between stocks
@@ -16,6 +29,119 @@ int stock_int;
 
 int main()
 {
+
+	Stock* s1 = new Stock("Tesla", 120);
+  //queue buy orders
+  s1->insertOrder(new LimitOrder(s1, 90, 10, true));
+  s1->insertOrder(new LimitOrder(s1, 100, 10, true));
+  //queue sell orders
+  s1->insertOrder(new LimitOrder(s1, 105, 5, false));
+  s1->insertOrder(new LimitOrder(s1, 108, 5, false));
+  s1->insertOrder(new LimitOrder(s1, 120, 12, false));
+
+  Stock* s2 = new Stock("Apple", 120);
+  s2->insertOrder(new LimitOrder(s2, 70, 10, true));
+  s2->insertOrder(new LimitOrder(s2, 80, 10, true));
+  //queue sell orders
+  s2->insertOrder(new LimitOrder(s2, 105, 5, false));
+  s2->insertOrder(new LimitOrder(s2, 108, 5, false));
+  s2->insertOrder(new LimitOrder(s2, 120, 12, false));
+
+  Stock* s3 = new Stock("Google", 130);
+  s3->insertOrder(new LimitOrder(s3, 70, 10, true));
+  s3->insertOrder(new LimitOrder(s3, 80, 10, true));
+  //queue sell orders
+  s3->insertOrder(new LimitOrder(s3, 105, 5, false));
+  s3->insertOrder(new LimitOrder(s3, 108, 5, false));
+  s3->insertOrder(new LimitOrder(s3, 120, 12, false));
+
+  Stock* s4 = new Stock("Amazon", 133);
+  s4->insertOrder(new LimitOrder(s4, 70, 10, true));
+  s4->insertOrder(new LimitOrder(s4, 80, 10, true));
+  //queue sell orders
+  s4->insertOrder(new LimitOrder(s4, 105, 5, false));
+  s4->insertOrder(new LimitOrder(s4, 108, 5, false));
+  s4->insertOrder(new LimitOrder(s4, 120, 12, false));
+
+  Stock* s5 = new Stock("Meta", 122);
+  s5->insertOrder(new LimitOrder(s5, 70, 10, true));
+  s5->insertOrder(new LimitOrder(s5, 80, 10, true));
+  //queue sell orders
+  s5->insertOrder(new LimitOrder(s5, 105, 5, false));
+  s5->insertOrder(new LimitOrder(s5, 108, 5, false));
+  s5->insertOrder(new LimitOrder(s5, 120, 12, false));
+
+  vector<Stock*> stocks = {s1, s2, s3, s4, s5};
+  StockMarket stockMarket = StockMarket(stocks);
+
+  // Login
+  // Account* currentUser = NULL;
+  Account* currentUser = stockMarket.findAccount("e"); //skip login for test
+ /* while (!currentUser) {
+    string email;
+    string password;
+    cout << "please input email" << endl;
+    cin >> email;
+    cout << "please input password" << endl;
+    cin >> password;
+    currentUser = stockMarket.login(email, password);
+  }*/
+
+  // Login as admin
+  if(currentUser->getType() == "admin") {
+    while(true) {
+      int action = 0;
+      cout << "Hi, " << currentUser->getName() << ". What do you want to do?" << endl;
+      cout << "1. block an account" << endl;
+      cout << "2. unblock an account" << endl;
+      cout << "3. upgrade an account" << endl;
+      cout << "4. downgrade an account" << endl;
+      cout << "5. log out" << endl;
+      while(action < 1 || action > 5) {
+        cout << "Please enter a number (1-5)" << endl;
+        cin >> action;
+      }
+      if (action == 5) {
+        break;
+      }
+
+      string name;
+      Account* account = NULL;
+      while(!account) {
+        cout << "Please choose a valid account by entering the name" << endl;
+        cin >> name;
+        account = stockMarket.findAccount(name);
+      }
+      switch(action) {
+        case 1:
+          static_cast<Admin*>(currentUser)->block(account);
+          break;
+        case 2:
+          static_cast<Admin*>(currentUser)->unblock(account);
+          break;
+        case 3:
+          static_cast<Admin*>(currentUser)->upgrade(account);
+          break;
+        case 4:
+          static_cast<Admin*>(currentUser)->downgrade(account);
+          break;
+      }
+      stockMarket.updateAccounts();
+    }
+  }
+
+  // Login as member
+  else if(currentUser->getType() == "member") {
+    currentUser->addStock(s1);
+    currentUser->addStock(s2);
+    currentUser->displayWatchlist();
+  }
+ bool run=true;
+  int input, input2;
+  string email;
+  string password;
+
+
   //loading in font
   sf::Font font;
   if (!font.loadFromFile("secrcode.ttf"))
@@ -25,7 +151,7 @@ int main()
     }
 
   sf::Color Grey(54,69,79);
-  
+
   sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Stock Trader");
   //window.setFillColor(sf::Color(0,0,102));
 
@@ -79,10 +205,10 @@ int main()
   DisplayText user_text("User: ", current_user_text, 15);
   user_text.setPos(270,560);
   user_text.textObj.setFont(font);
-  
+
   user_text.textObj.setStyle(sf::Text::Bold);
 
-  
+
   //Watch list UI
   sf::RectangleShape buy_watch, sell_watch;
 
@@ -110,7 +236,7 @@ int main()
 
   b_watch_display.textObj.setStyle(sf::Text::Bold);
   s_watch_display.textObj.setStyle(sf::Text::Bold);
-  
+
   // vertical lines to seperate stock options in price_overview
   sf::RectangleShape line1, line2, line3, line4, watch_line;
   Button line_b1(line1, 100, 3, 255,255,255);
@@ -133,13 +259,13 @@ int main()
   //sf::Image tesla, apple, google, meta, amazon;
 
   //if(!background.loadFromFile()
-  
 
-  
+
+
   //watch line is line for watch lists
   Button watch_line_b(watch_line, 250,3, 0,0,0);
   watch_line_b.setPos(10,415);
-  
+
   // testing with sf::Text class
   sf::Text text;
   text.setFont(font);
@@ -149,7 +275,7 @@ int main()
 
   //Button Texts
   sf::Text buy_text, sell_text, buy_order, sell_order, change_usr, add_bank, balance_text, plus, minus, purchaseAmount_text;
-  
+
   DisplayText buy_t("Buy", buy_text, 20);
   buy_t.setPos(50, 25);
   (buy_t.textObj).setFont(font);
@@ -185,7 +311,7 @@ int main()
   DisplayText meta_t("Meta", meta, 40);
   DisplayText apple_t("Apple", apple, 40);
   DisplayText tesla_t("Tesla", tesla, 40);
-  
+
   google_t.setPos(290,30);
   amazon_t.setPos(290,30);
   meta_t.setPos(290,30);
@@ -198,21 +324,19 @@ int main()
   apple_t.textObj.setFont(font);
   tesla_t.textObj.setFont(font);
 
-  
 
-  
   // + and - buttons for buy/sell & buyOrder/sellOrder & purchaseAmount
   sf::CircleShape trianglePlus(30,3);
   sf::CircleShape triangleMinus(30,3);
-  
+
   sf::RectangleShape r_purchaseAmount;
   Button b_purchaseAmount(r_purchaseAmount, 50,30,224,224,224);
   b_purchaseAmount.setPos(110,302);
-  
+
   triangleMinus.rotate(180);
   triangleMinus.setPosition(165,385);
   trianglePlus.setPosition(105,250);
-  
+
   DisplayText plus_t("+", plus, 40);
   plus_t.setPos(125, 250);
   (plus_t.textObj).setFont(font);
@@ -241,8 +365,8 @@ int main()
   log_text.textObj.setOutlineThickness(5);
 
   (log_text.textObj).setFont(font);
-		       
-  
+
+
   // main loop
   while (window.isOpen())
     {
@@ -253,7 +377,7 @@ int main()
 	  // exit applet
 	  if (event.type == sf::Event::Closed)
 	    window.close();
-	  
+
 	  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 	    {
 	      std::cout<<"Closing window..."<<std::endl;
@@ -269,26 +393,81 @@ int main()
 	      if (event.mouseButton.button == sf::Mouse::Left && event.mouseButton.x >= 140
 		  && event.mouseButton.x <= 260 && event.mouseButton.y >= 170 && event.mouseButton.y <= 230)
 		{
-		  balance += purchaseAmount * 50;
-		  balance_t.change_text(std::to_string(balance));
-		  std::cout << balance << std::endl;
+
+			currentUser->deposit(500);
+
+		  balance_t.change_text(std::to_string(currentUser->getBalance()));
+
 		}
 
 	      // buy button
 	      if (event.mouseButton.button == sf::Mouse::Left && event.mouseButton.x >= 10
 		  && event.mouseButton.x <= 130 && event.mouseButton.y >= 10 && event.mouseButton.y <= 70)
 		{
-		  balance -= purchaseAmount * 50;
-		  balance_t.change_text(std::to_string(balance));
-		  std :: cout << balance << std :: endl;
+
+			switch(stock_int)
+			{
+			case(1):
+					currentUser -> buy(s1,purchaseAmount,s1->getPrice(), "");
+      		currentUser -> withdraw(purchaseAmount * (s1->getPrice()));
+	  			break;
+			case(2):
+	  			currentUser -> buy(s2,purchaseAmount,s2->getPrice(), "");
+      	  currentUser -> withdraw(purchaseAmount * (s2->getPrice()));
+	  			break;
+			case(3):
+					currentUser -> buy(s3,purchaseAmount,s3->getPrice(), "");
+        	currentUser -> withdraw(purchaseAmount * (s3->getPrice()));
+	  			break;
+			case(4):
+	  			currentUser -> buy(s4,purchaseAmount,s4->getPrice(), "");
+        	currentUser -> withdraw(purchaseAmount * (s4->getPrice()));
+	  			break;
+			case(5):
+	  			currentUser -> buy(s5,purchaseAmount,s5->getPrice(), "");
+        	currentUser -> withdraw(purchaseAmount * (s5->getPrice()));
+	  			break;
+			default:
+				 break;
+			}
+
+		  //balance -= purchaseAmount * 50;
+		  balance_t.change_text(std::to_string(currentUser->getBalance()));
+		  std :: cout << "balance" << std :: endl;
 		}
-	      
+
 	      // sell button
 	      if (event.mouseButton.button == sf::Mouse::Left && event.mouseButton.x >= 140
 		  && event.mouseButton.x <= 260 && event.mouseButton.y >= 10 && event.mouseButton.y <= 70)
 		{
-		  balance += purchaseAmount * 1;
-		  balance_t.change_text(std::to_string(balance));
+			switch(stock_int)
+			{
+			case(1):
+					currentUser -> sell(s1,purchaseAmount,s1->getPrice(), "");
+      		currentUser -> deposit(purchaseAmountinput2 * (s1->getPrice()));
+	  			break;
+			case(2):
+	  			currentUser -> sell(s2,purchaseAmount,s2->getPrice(), "");
+      	  currentUser -> deposit(purchaseAmount * (s2->getPrice()));
+	  			break;
+			case(3):
+					currentUser -> sell(s3,purchaseAmount,s3->getPrice(), "");
+        	currentUser -> deposit(purchaseAmount * (s3->getPrice()));
+	  			break;
+			case(4):
+	  			currentUser -> sell(s4,purchaseAmount,s4->getPrice(), "");
+        	currentUser -> deposit(purchaseAmount * (s4->getPrice()));
+	  			break;
+			case(5):
+	  			currentUser -> sell(s5,purchaseAmount,s5->getPrice(), "");
+        	currentUser -> deposit(purchaseAmount * (s5->getPrice()));
+	  			break;
+			default:
+				 break;
+			}
+
+		  //balance += purchaseAmount * 1;
+		  balance_t.change_text(std::to_string(currentUser->getBalance()));
 		  std :: cout << "Sell Button clicked" << std :: endl;
 		}
 
@@ -305,7 +484,7 @@ int main()
 	      // 	{
 	      // 	  std :: cout << "Sell Order set: needs popup" << std :: endl;
 	      // 	}
-	      
+
 	      // change user button
 	      if (event.mouseButton.button == sf::Mouse::Left && event.mouseButton.x >= 10
 		  && event.mouseButton.x <= 130 && event.mouseButton.y >= 170 && event.mouseButton.y <= 230)
@@ -315,11 +494,12 @@ int main()
 		    {
 		      window.draw(log_text.textObj);
 		      window.display();
-		      std::string usr, pass; // only for testing
-		      std :: cout << "Please enter your account name: " << std :: endl;
-		      std :: cin >> usr;
-		      std :: cout << "Please enter your password: " << std :: endl;
-		      std :: cin >> pass;
+		      std::string email, password; // only for testing
+		      std::cout << "Please enter email" << std::endl;
+      		std::cin >> email;
+      		std::cout<<"Please enter password: "<<std::endl;
+    			std::cin>>password;
+      		currentUser = stockMarket.login(email,password);
 
 		      std:: cout << "Usr: " << usr << " ... Pass: " << pass << std :: endl;
 		      usr_t.change_text("Logout");
@@ -331,7 +511,7 @@ int main()
 		      break;
 		    }
 		}
-	      
+
 	      // plus and minus arrow buttons
 	      if (event.mouseButton.button == sf::Mouse::Left && event.mouseButton.x >= 105
 		  && event.mouseButton.x <= 170 && event.mouseButton.y >= 250 && event.mouseButton.y <= 295)
@@ -370,7 +550,7 @@ int main()
 		  stock_int=3;
 		  std::cout<<"meta"<<std::endl;
 		}
-	      
+
 	      //appple
 	      if (event.mouseButton.button == sf::Mouse::Left && event.mouseButton.x >= 600
 		  && event.mouseButton.x <= 710 && event.mouseButton.y >= 440 && event.mouseButton.y <= 550)
@@ -386,14 +566,14 @@ int main()
 		  stock_int=5;
 		  std::cout<<"tesla"<<std::endl;
 		}
-	      
+
 	    }
-	  
-  
+
+
 	} // end events
 
 	// Drawing GUI and updates
-        window.clear(sf::Color(15,5,30));
+  window.clear(sf::Color(15,5,30));
 	window.draw(b1.recB);
 	window.draw(b2.recB);
 	//window.draw(b3.recB);
@@ -414,7 +594,7 @@ int main()
 	window.draw(sell_list.recB);
 	window.draw(watch_line_b.recB);
 	window.draw(current_user_b.recB);
-	
+
 	window.draw(text);
 	window.draw(buy_t.textObj);
 	window.draw(sell_t.textObj);
@@ -451,11 +631,11 @@ int main()
 	  break;
 	}
 
-	
+
 	// text input
 	//window.draw(log_button.recB);
-	
-	
+
+
 	window.display();
     }
 
