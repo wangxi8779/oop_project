@@ -15,8 +15,8 @@ double Order::bidPrice() { return 0; }
 
 void Order::cancel() { status = "cancelled"; }
 
-//bool Order::isFilled() { return status == "filled"; }
-bool Order::isFilled() { return false; }
+bool Order::isFilled() { return status == "filled"; }
+// bool Order::isFilled() { return false; }
 
 bool Order::getIsBuyOrder() { return isBuyOrder; }
 

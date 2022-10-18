@@ -84,6 +84,4 @@ void StockPortfolio::refresh() {
   gain = stock->getPrice() * quantity - totalPaid;
 }
 
-StockPortfolio::~StockPortfolio() {
-  orders.clear();
-}
+StockPortfolio::~StockPortfolio() {}

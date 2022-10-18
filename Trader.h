@@ -9,7 +9,7 @@
 
 class Trader : public Member {
  private:
-  std::vector<StockPortfolio> stockPortfolios; 
+  std::vector<StockPortfolio*> stockPortfolios;
 
  public:
   Trader(std::string password, std::string name, std::string phone,
