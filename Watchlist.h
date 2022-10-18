@@ -21,4 +21,3 @@ class Watchlist {
 };
 
 #endif
-ß\

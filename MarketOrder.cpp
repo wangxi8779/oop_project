@@ -9,8 +9,8 @@ MarketOrder::MarketOrder(Stock* stock, int quantity, bool isBuyOrder) {
 
 bool MarketOrder::match(Order* order)
 {
-  int transaction_quantity = 0;
-  double transaction_price = 0;
+  int transactionQuantity = 0;
+  double transactionPrice = 0;
   if (isBuyOrder)
   {
     if (bidPrice() >= order->bidPrice())
@@ -18,30 +18,30 @@ bool MarketOrder::match(Order* order)
       // decide the transaction quantity based on order quantity
       if (getUnfilledQuantity() >= order->getUnfilledQuantity())
       {
-        transaction_quantity = order->getUnfilledQuantity();
+        transactionQuantity = order->getUnfilledQuantity();
       }
       else
       {
-        transaction_quantity = getUnfilledQuantity();
+        transactionQuantity = getUnfilledQuantity();
       }
       // decide the transaction price based on order type and bid price
       if (order->isMarketOrder())
       {
         // if both market orders, use current stock price
-        transaction_price = stock->getPrice();
+        transactionPrice = stock->getPrice();
       }
       else
       {
         // if sell order is limited, use the bid price
-        transaction_price = order->bidPrice();
+        transactionPrice = order->bidPrice();
       }
 
       // save the transaction record for both of buy and sell orders
-      addTransaction(Transaction(transaction_price, transaction_quantity));
-      order->addTransaction(Transaction(transaction_price, transaction_quantity));
+      addTransaction(Transaction(transactionPrice, transactionQuantity));
+      order->addTransaction(Transaction(transactionPrice, transactionQuantity));
 
       // adjust the stock price
-      stock->setPrice(transaction_price);
+      stock->setPrice(transactionPrice);
       return true;
     }
     else
@@ -55,23 +55,23 @@ bool MarketOrder::match(Order* order)
     {
       if (getUnfilledQuantity() >= order->getUnfilledQuantity())
       {
-        transaction_quantity = order->getUnfilledQuantity();
+        transactionQuantity = order->getUnfilledQuantity();
       }
       else
       {
-        transaction_quantity = getUnfilledQuantity();
+        transactionQuantity = getUnfilledQuantity();
       }
       if (order->isMarketOrder())
       {
-        transaction_price = stock->getPrice();
+        transactionPrice = stock->getPrice();
       }
       else
       {
-        transaction_price = order->bidPrice();
+        transactionPrice = order->bidPrice();
       }
-      addTransaction(Transaction(transaction_price, transaction_quantity));
-      order->addTransaction(Transaction(transaction_price, transaction_quantity));
-      stock->setPrice(transaction_price);
+      addTransaction(Transaction(transactionPrice, transactionQuantity));
+      order->addTransaction(Transaction(transactionPrice, transactionQuantity));
+      stock->setPrice(transactionPrice);
       return true;
     }
     else

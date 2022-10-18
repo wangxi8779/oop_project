@@ -10,24 +10,24 @@ LimitOrder::LimitOrder(Stock *stock, double price, int quantity,
 }
 
 bool LimitOrder::match(Order *order) {
-  int transaction_quantity = 0;
-  double transaction_price = 0;
+  int transactionQuantity = 0;
+  double transactionPrice = 0;
   if (isBuyOrder) {
     if (bidPrice() >= order->bidPrice()) {
       if (getUnfilledQuantity() >= order->getUnfilledQuantity()) {
-        transaction_quantity = order->getUnfilledQuantity();
+        transactionQuantity = order->getUnfilledQuantity();
       } else {
-        transaction_quantity = getUnfilledQuantity();
+        transactionQuantity = getUnfilledQuantity();
       }
       if (order->isMarketOrder()) {
-        transaction_price = price;
+        transactionPrice = price;
       } else {
-        transaction_price = order->bidPrice();
+        transactionPrice = order->bidPrice();
       }
-      addTransaction(Transaction(transaction_price, transaction_quantity));
+      addTransaction(Transaction(transactionPrice, transactionQuantity));
       order->addTransaction(
-          Transaction(transaction_price, transaction_quantity));
-      stock->setPrice(transaction_price);
+          Transaction(transactionPrice, transactionQuantity));
+      stock->setPrice(transactionPrice);
       return true;
     } else {
       return false;
@@ -35,15 +35,15 @@ bool LimitOrder::match(Order *order) {
   } else {
     if (bidPrice() <= order->bidPrice()) {
       if (getUnfilledQuantity() >= order->getUnfilledQuantity()) {
-        transaction_quantity = order->getUnfilledQuantity();
+        transactionQuantity = order->getUnfilledQuantity();
       } else {
-        transaction_quantity = getUnfilledQuantity();
+        transactionQuantity = getUnfilledQuantity();
       }
-      transaction_price = price;
-      addTransaction(Transaction(transaction_price, transaction_quantity));
+      transactionPrice = price;
+      addTransaction(Transaction(transactionPrice, transactionQuantity));
       order->addTransaction(
-          Transaction(transaction_price, transaction_quantity));
-      stock->setPrice(transaction_price);
+          Transaction(transactionPrice, transactionQuantity));
+      stock->setPrice(transactionPrice);
       return true;
     } else {
       return false;
