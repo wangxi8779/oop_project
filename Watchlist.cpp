@@ -13,9 +13,4 @@ void Watchlist::removeStock(Stock* stock) {
 }
 std::vector<Stock*> Watchlist::getStocks() { return stocks; }
 
-Watchlist::~Watchlist() {
-  for (Stock* stock : stocks) {
-    delete stock;
-  }
-  stocks.clear();
-}
+Watchlist::~Watchlist() { stocks.clear(); }

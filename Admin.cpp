@@ -23,6 +23,4 @@ void Admin::displayWatchlist() {}
 void Admin::addStock(Stock* stock) {}
 void Admin::removeStock(Stock* stock) {}
 
-Admin::~Admin() {
-  delete stockMarket;
-}
+Admin::~Admin() {}

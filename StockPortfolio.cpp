@@ -85,9 +85,5 @@ void StockPortfolio::refresh() {
 }
 
 StockPortfolio::~StockPortfolio() {
-  delete stock;
-  for(Order* order : orders) {
-    delete order;
-  }
   orders.clear();
 }
