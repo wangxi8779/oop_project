@@ -34,8 +34,8 @@ int main() {
   StockMarket stockMarket = StockMarket(stocks);
 
   // Login
-  // Account* currentUser = NULL;
-  Account* currentUser = stockMarket.findAccount("e"); //skip login for test
+  // Account* currentUser = stockMarket.findAccount("e"); //skip login for test
+  Account* currentUser = NULL;
   while (!currentUser) {
     string email;
     string password;
@@ -89,14 +89,14 @@ int main() {
     }
   }
 
-  // Login as member
+  // Test login as member
   else if(currentUser->getType() == "member") {
     currentUser->addStock(s1);
     currentUser->addStock(s2);
     currentUser->displayWatchlist();
   }
 
-  // Login as trader
+  // Test login as trader
   else if(currentUser->getType() == "trader") {
     currentUser->addStock(s1);
     currentUser->addStock(s2);
@@ -104,24 +104,24 @@ int main() {
     // currentUser->addStock(s4);
     // currentUser->addStock(s5);
     // currentUser->displayWatchlist();
+
+    // test buy and sell limit order
     currentUser->buy(s1, 5, 105, "limit");
     currentUser->deposit(1000000000);
     currentUser->buy(s1, 8, 108, "limit");
     currentUser->buy(s1, 10, 118, "limit");
     currentUser->displayWatchlist();
-//     currentUser->sell(s1, 2, 117, "limit");
-//     currentUser->displayWatchlist();
+    currentUser->sell(s1, 2, 117, "limit");
+    currentUser->displayWatchlist();
 
-//     currentUser->buy(s1, 2, 0, "market");
-//     currentUser->displayWatchlist();
-//     currentUser->sell(s1, 2, 0, "market");
-//     currentUser->displayWatchlist();
+    currentUser->buy(s1, 2, 0, "market");
+    currentUser->displayWatchlist();
+    currentUser->sell(s1, 2, 0, "market");
+    currentUser->displayWatchlist();
 
-//     // buy stock Apple
-//     currentUser->buy(s2, 6, 0, "market");
-//     currentUser->displayWatchlist();
-//     currentUser->sell(s2, 10, 0, "market");
-//   }
-// }
+    // test buy and sell market order
+    currentUser->buy(s2, 6, 0, "market");
+    currentUser->displayWatchlist();
+    currentUser->sell(s2, 10, 0, "market");
   }
 }
